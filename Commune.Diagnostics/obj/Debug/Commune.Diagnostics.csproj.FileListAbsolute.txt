@@ -1,0 +1,15 @@
+C:\Users\Сергей\Documents\Visual Studio 2008\Commune\Commune.Diagnostics\Commune.Diagnostics\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Сергей\Documents\Visual Studio 2008\Commune\Commune.Diagnostics\Commune.Diagnostics\bin\Debug\Commune.Diagnostics.dll
+C:\Users\Сергей\Documents\Visual Studio 2008\Commune\Commune.Diagnostics\Commune.Diagnostics\bin\Debug\Commune.Diagnostics.pdb
+C:\Users\Сергей\Documents\Visual Studio 2008\Commune\Commune.Diagnostics\Commune.Diagnostics\obj\Debug\Commune.Diagnostics.dll
+C:\Users\Сергей\Documents\Visual Studio 2008\Commune\Commune.Diagnostics\Commune.Diagnostics\obj\Debug\Commune.Diagnostics.pdb
+C:\Users\Сергей\Documents\Visual Studio 2008\Projects\Commune\Commune.Diagnostics\bin\Debug\Commune.Diagnostics.dll
+C:\Users\Сергей\Documents\Visual Studio 2008\Projects\Commune\Commune.Diagnostics\bin\Debug\Commune.Diagnostics.pdb
+C:\Users\Сергей\Documents\Visual Studio 2008\Projects\Commune\Commune.Diagnostics\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Сергей\Documents\Visual Studio 2008\Projects\Commune\Commune.Diagnostics\obj\Debug\Commune.Diagnostics.dll
+C:\Users\Сергей\Documents\Visual Studio 2008\Projects\Commune\Commune.Diagnostics\obj\Debug\Commune.Diagnostics.pdb
+c:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Diagnostics\bin\Debug\Commune.Diagnostics.dll
+c:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Diagnostics\bin\Debug\Commune.Diagnostics.pdb
+c:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Diagnostics\obj\Debug\Commune.Diagnostics.csprojResolveAssemblyReference.cache
+c:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Diagnostics\obj\Debug\Commune.Diagnostics.dll
+c:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Diagnostics\obj\Debug\Commune.Diagnostics.pdb

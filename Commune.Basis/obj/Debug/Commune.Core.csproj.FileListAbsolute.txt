@@ -1,0 +1,7 @@
+C:\Users\Сергей\Documents\Visual Studio 2008\Projects\Commune\Commune.Core\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Сергей\Documents\Visual Studio 2008\Projects\Commune\Commune.Core\bin\Debug\Commune.Core.dll
+C:\Users\Сергей\Documents\Visual Studio 2008\Projects\Commune\Commune.Core\bin\Debug\Commune.Core.pdb
+C:\Users\Сергей\Documents\Visual Studio 2008\Projects\Commune\Commune.Core\bin\Debug\Commune.Diagnostics.dll
+C:\Users\Сергей\Documents\Visual Studio 2008\Projects\Commune\Commune.Core\bin\Debug\Commune.Diagnostics.pdb
+C:\Users\Сергей\Documents\Visual Studio 2008\Projects\Commune\Commune.Core\obj\Debug\Commune.Core.dll
+C:\Users\Сергей\Documents\Visual Studio 2008\Projects\Commune\Commune.Core\obj\Debug\Commune.Core.pdb

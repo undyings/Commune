@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commune.Diagnostics", "Commune.Diagnostics\Commune.Diagnostics.csproj", "{A95AEFA8-F6D2-4318-AD5F-0C7D3D337D01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commune.Data", "Commune.Data\Commune.Data.csproj", "{AE7C4F8F-FBAC-4CBF-9443-22025C03400E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commune.Basis", "Commune.Basis\Commune.Basis.csproj", "{11438042-4D91-437D-93C2-69B0636E741F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commune.Html", "Commune.Html\Commune.Html.csproj", "{011031E6-CBB8-4839-BAB0-254FCD5850C0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Libraries", "_Libraries", "{6F1F78FA-9B5E-4FE9-977C-9856EAB95369}"
+	ProjectSection(SolutionItems) = preProject
+		_Libraries\MetaTech.Library.4.dll = _Libraries\MetaTech.Library.4.dll
+		_Libraries\Newtonsoft.Json.dll = _Libraries\Newtonsoft.Json.dll
+		_Libraries\NitroBolt.Functional.dll = _Libraries\NitroBolt.Functional.dll
+		_Libraries\NitroBolt.Wui.dll = _Libraries\NitroBolt.Wui.dll
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A95AEFA8-F6D2-4318-AD5F-0C7D3D337D01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A95AEFA8-F6D2-4318-AD5F-0C7D3D337D01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A95AEFA8-F6D2-4318-AD5F-0C7D3D337D01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A95AEFA8-F6D2-4318-AD5F-0C7D3D337D01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE7C4F8F-FBAC-4CBF-9443-22025C03400E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE7C4F8F-FBAC-4CBF-9443-22025C03400E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE7C4F8F-FBAC-4CBF-9443-22025C03400E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE7C4F8F-FBAC-4CBF-9443-22025C03400E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11438042-4D91-437D-93C2-69B0636E741F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11438042-4D91-437D-93C2-69B0636E741F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11438042-4D91-437D-93C2-69B0636E741F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11438042-4D91-437D-93C2-69B0636E741F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{011031E6-CBB8-4839-BAB0-254FCD5850C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{011031E6-CBB8-4839-BAB0-254FCD5850C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{011031E6-CBB8-4839-BAB0-254FCD5850C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{011031E6-CBB8-4839-BAB0-254FCD5850C0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

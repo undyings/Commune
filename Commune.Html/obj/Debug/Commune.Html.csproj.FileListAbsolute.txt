@@ -1,0 +1,12 @@
+c:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Html\obj\Debug\Commune.Html.csprojResolveAssemblyReference.cache
+c:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Html\bin\Debug\Commune.Html.dll
+c:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Html\bin\Debug\Commune.Html.pdb
+c:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Html\bin\Debug\Commune.Basis.dll
+c:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Html\bin\Debug\NitroBolt.Wui.dll
+c:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Html\bin\Debug\Commune.Diagnostics.dll
+c:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Html\bin\Debug\Commune.Basis.pdb
+c:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Html\bin\Debug\Commune.Diagnostics.pdb
+c:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Html\obj\Debug\Commune.Html.dll
+c:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Html\obj\Debug\Commune.Html.pdb
+C:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Html\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Html\bin\Debug\NitroBolt.Functional.dll
