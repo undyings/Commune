@@ -7,16 +7,16 @@ using NitroBolt.Wui;
 
 namespace Commune.Html
 {
-  public class HTextEdit : ExtensionContainer, IHtmlControl
+  public class HSearchEdit : ExtensionContainer, IHtmlControl
   {
     readonly string value;
-    public HTextEdit(string dataName, string value) :
-      base("HTextEdit", dataName)
+    public HSearchEdit(string dataName, string value) :
+      base("SearchEdit", dataName)
     {
       this.value = value;
     }
 
-    public HTextEdit(string dataName) :
+    public HSearchEdit(string dataName) :
       this(dataName, "")
     {
     }
@@ -28,7 +28,7 @@ namespace Commune.Html
       HtmlHlp.AddClassToCss(css, cssClassName, CssExtensions);
 
       return h.Input(HtmlHlp.ContentForHElement(this, cssClassName,
-        h.type("text"), h.data("name", Name), h.value(value), h.data("id", Name))
+        h.type("search"), h.data("name", Name), h.value(value))
       );
     }
   }

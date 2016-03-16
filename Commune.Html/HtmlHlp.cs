@@ -11,14 +11,73 @@ namespace Commune.Html
 {
   public static class HtmlHlp
   {
+    static readonly HBuilder h = null;
+
+    public static IHtmlControl CKEditorCreate(string dataName, string text,
+      string height, bool isRu, params string[] editorProps)
+    {
+      List<string> propList = new List<string>();
+      propList.Add(string.Format("height: '{0}'", height));
+      if (isRu)
+        propList.Add("language: 'ru'");
+      propList.AddRange(editorProps);
+
+      return new HElementControl(
+        h.TextArea(
+          new HAttribute("id", dataName),
+          h.@class(dataName),
+          h.data("name", dataName),
+          h.Attribute("js-init", string.Format("CKEDITOR.replace(this[0], {{ {0} }})",
+            StringHlp.Join(", ", "{0}", propList)
+          )),
+          text
+        ), dataName
+      );
+    }
+
+    public static HElement CKEditorUpdateAll()
+    {
+      return h.Script(@"
+               function CK_updateAll()
+               {
+                 try
+                 {
+                   for (instance in CKEDITOR.instances)
+                     CKEDITOR.instances[instance].updateElement();
+                 }
+                 catch(ex)
+                 {
+                   console.log(ex);
+                 }
+               }
+            ");
+    }
+
+    public static T CKEditorOnUpdateAll<T>(this T control) where T : IEditExtension
+    {
+      return control.OnClick("CK_updateAll();");
+    }
+
     public static string Get(this HttpContext context, string argName)
     {
-      return context.Request.QueryString[argName];
+      string arg = context.Request.QueryString[argName];
+      if (arg == null)
+        return null;
+      return arg.ToLower();
     }
 
     public static int? GetUInt(this HttpContext context, string argName)
     {
       return Parse(context.Request.QueryString[argName]);
+    }
+
+    public static TState GetState<TState>(this HttpContext context)
+    {
+      UpdateCycle<HElement>[] updates = HWebSynchronizeHandler.Updates(context);
+      if (updates.Length == 0)
+        return default(TState);
+
+      return (TState)updates[0].State;
     }
 
     public static int? Parse(string arg)
@@ -53,8 +112,6 @@ namespace Commune.Html
         content.Add(new HAttribute(extension.Name, extension.Value));
       return content.ToArray();
     }
-
-    static HBuilder h = null;
 
     //public static void AddHoverToCss(StringBuilder css, string cssClassName, IReadExtension control)
     //{

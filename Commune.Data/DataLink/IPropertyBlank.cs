@@ -21,9 +21,9 @@ namespace Commune.Data
   }
 
 
-  public class RowPropertyBlank<TField> : RowPropertyBlank<string, TField>
+  public class RowPropertyBlank<TField> : RowPropertyBlank<int, TField>
   {
-    public RowPropertyBlank(string propertyKind, FieldBlank<TField> field)
+    public RowPropertyBlank(int propertyKind, FieldBlank<TField> field)
       : base(propertyKind, field)
     {
     }
@@ -51,21 +51,21 @@ namespace Commune.Data
     }
   }
 
-  public class StringPropertyKindBlank : IPropertyKindBlank<string>
+  public class LinkKindBlank : IPropertyKindBlank<int>
   {
-    private readonly string kind;
+    private readonly int kind;
 
-    public StringPropertyKindBlank(string propertyKind)
+    public LinkKindBlank(int linkKind)
     {
-      this.kind = propertyKind;
+      this.kind = linkKind;
     }
 
-    public IPropertyBlank<string, TField> For<TField>(FieldBlank<TField> field)
+    public IPropertyBlank<int, TField> For<TField>(FieldBlank<TField> field)
     {
       return new RowPropertyBlank<TField>(this.kind, field);
     }
 
-    public string Kind
+    public int Kind
     {
       get
       {

@@ -68,6 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthHlp.cs" />
     <Compile Include="Controls\HButton.cs" />
     <Compile Include="Controls\HCheckEdit.cs" />
     <Compile Include="Controls\HDropdown.cs" />
@@ -76,17 +77,23 @@
     <Compile Include="Controls\HInputCheck.cs" />
     <Compile Include="Controls\HComboEdit.cs" />
     <Compile Include="Controls\HImage.cs" />
+    <Compile Include="Controls\HFileUploader.cs" />
+    <Compile Include="Controls\HInputRadio.cs" />
     <Compile Include="Controls\HLabel.cs" />
     <Compile Include="Controls\HLink.cs" />
     <Compile Include="Controls\HPasswordEdit.cs" />
+    <Compile Include="Controls\HSearchEdit.cs" />
     <Compile Include="Controls\HSeparator.cs" />
     <Compile Include="Controls\HSpan.cs" />
     <Compile Include="Controls\HSpoiler.cs" />
-    <Compile Include="Controls\HText.cs" />
+    <Compile Include="Controls\HTextArea.cs" />
+    <Compile Include="Controls\HTextView.cs" />
     <Compile Include="Controls\HTextEdit.cs" />
     <Compile Include="Enum.cs" />
     <Compile Include="Controls\HXPanel.cs" />
     <Compile Include="CssExt.cs" />
+    <Compile Include="Grid\HGrid.cs" />
+    <Compile Include="Grid\HGridStyle.cs" />
     <Compile Include="Grid\HRowStyle.cs" />
     <Compile Include="Grid\HColumn.cs" />
     <Compile Include="Grid\HTableGrid.cs" />
@@ -115,6 +122,10 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\fileuploader.css" />
+    <Content Include="Resources\fileuploader.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

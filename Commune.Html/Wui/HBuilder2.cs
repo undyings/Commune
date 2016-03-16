@@ -37,6 +37,8 @@ namespace NitroBolt.Wui
       foreach (HAttribute id in handler)
       {
         object jsonId = json.JPath(id.Name.LocalName.Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries));
+
+        //Logger.AddMessage("IsEventElement: {0}, {1}", id, jsonId);
         if (jsonId == null)
           return false;
 
@@ -53,6 +55,13 @@ namespace NitroBolt.Wui
     {
       return new HElement("link", h.Rel("stylesheet"), h.type("text/css"), h.href(cssUrl));
       //return Link(h, "stylesheet", cssUrl);
+    }
+
+    public static HElement LinkShortcutIcon(this HBuilder h, string iconUrl)
+    {
+      bool isPng = iconUrl.EndsWith("png", StringComparison.InvariantCultureIgnoreCase);
+      string type = isPng ? "image / png" : "image / x - icon";
+      return new HElement("link", h.Rel("shortcut icon"), h.href(iconUrl), h.type(type));
     }
 
     public static HAttribute Rel(this HBuilder h, string rel)

@@ -41,15 +41,13 @@ namespace Commune.Data
 
     public DatabaseTableProvider(IDataLayer dbConnection, string database,
       string select, string conditionWithoutWhere, params DbParameter[] conditionParameters) :
-      this(dbConnection, database, select, dbConnection.GetTable(database, 
+      this(dbConnection, database, dbConnection.GetTable(database, 
         StringHlp.IsEmpty(conditionWithoutWhere) ? select : string.Format("{0} Where {1}", select, conditionWithoutWhere),
-        conditionParameters))
+        conditionParameters), select)
     {
-      //table.PrimaryKey = new DataColumn[] { table.Columns[0] };
     }
 
-    public DatabaseTableProvider(IDataLayer dbConnection, string database,
-      string updateQuery, DataTable table)
+    public DatabaseTableProvider(IDataLayer dbConnection, string database, DataTable table, string updateQuery)
     {
       this.dbConnection = dbConnection;
       this.database = database;
@@ -83,26 +81,7 @@ namespace Commune.Data
       }
     }
 
-    //public SourceTableProvider(TableLink sourceTableLink, RowLink[] sourceRows)
-    //{
-    //  this.sourceTableLink = sourceTableLink;
-
-    //  this.table = sourceTableLink.Table.Clone();
-
-    //  foreach (RowLink sourceRow in sourceRows)
-    //  {
-    //    DataRow newRow = table.NewRow();
-    //    for (int i = 0; i < table.Columns.Count; ++i)
-    //    {
-    //      newRow[i] = sourceRow.DataRow[i];
-    //    }
-    //    table.Rows.Add(newRow);
-    //  }
-
-    //  table.AcceptChanges();
-    //}
-
-    public SourceTableProvider(TableLink sourceTableLink, IndexBlank index, params object[] keyParts) :
+     public SourceTableProvider(TableLink sourceTableLink, IndexBlank index, params object[] keyParts) :
       this(sourceTableLink, sourceTableLink.FindRows(index, keyParts))
     {
     }

@@ -7,16 +7,16 @@ using NitroBolt.Wui;
 
 namespace Commune.Html
 {
-  public class HTextEdit : ExtensionContainer, IHtmlControl
+  public class HTextArea : ExtensionContainer, IHtmlControl
   {
-    readonly string value;
-    public HTextEdit(string dataName, string value) :
-      base("HTextEdit", dataName)
+    readonly string text;
+    public HTextArea(string dataName, string text) :
+      base("HTextArea", dataName)
     {
-      this.value = value;
+      this.text = text;
     }
 
-    public HTextEdit(string dataName) :
+    public HTextArea(string dataName) :
       this(dataName, "")
     {
     }
@@ -27,8 +27,8 @@ namespace Commune.Html
     {
       HtmlHlp.AddClassToCss(css, cssClassName, CssExtensions);
 
-      return h.Input(HtmlHlp.ContentForHElement(this, cssClassName,
-        h.type("text"), h.data("name", Name), h.value(value), h.data("id", Name))
+      return h.TextArea(HtmlHlp.ContentForHElement(this, cssClassName,
+        h.data("name", Name), text)
       );
     }
   }

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Commune.Html.Standart
+namespace Commune.Html
 {
   public static class std
   {
@@ -88,22 +88,20 @@ namespace Commune.Html.Standart
         .LinearGradient("to top right", "#dddddd", "#f1f1f1");
     }
 
-    //public static HDropdown ComboButton(string caption, IHtmlControl prefix, int vertPadding, int horPadding)
-    //{
-    //  new HDropdown(
-    //}
-
     /// <summary>
-    /// Создает HXPanel с NoWrap()
-    /// Оборачивает дочерние контролы не являющиеся панелями в HPanel с VAlign(null)
+    /// Создает HXPanel
+    /// Оборачивает дочерние контролы не являющиеся панелями в HPanel
+    /// По умолчанию выставляет всем дочерним панелям VAlign(null)
     /// </summary>
     public static HXPanel RowPanel(params IHtmlControl[] controls)
     {
       IHtmlControl[] panelControls = ArrayHlp.Convert(controls, delegate(IHtmlControl control)
       {
-        if (control is HPanel || control is HXPanel)
-          return control;
-        return new HPanel(control).VAlign(null);
+        if (!(control is HPanel || control is HXPanel))
+          control = new HPanel(control);
+        DefaultExtensionContainer defaults = new DefaultExtensionContainer(control);
+        defaults.VAlign(null);
+        return control;
       });
 
       return new HXPanel(panelControls); //.NoWrap();
@@ -124,6 +122,47 @@ namespace Commune.Html.Standart
       return new HPanel(control).WidthFill();
     }
 
+    public static HXPanel SimpleHeader(params IHtmlControl[] cells)
+    {
+      foreach (IHtmlControl cell in cells)
+      {
+        DefaultExtensionContainer defaults = new DefaultExtensionContainer(cell);
+        defaults.Align(null);
+        defaults.VAlign(null);
+        defaults.FontBold();
+      }
+
+      return new HXPanel(cells);
+    }
+
+
+    public static HPanel OperationWarning(WebOperation operation)
+    {
+      string titleColor = "#FFF"; // "#F1F6CD";
+      string titleBackground = "#880000"; // "#CC0000"; // "#597BA5";
+      return new HPanel(
+        new HPanel(
+          new HLabel("",
+            new HBefore().Content(@"\f0e7")
+              .Color(titleColor).Opacity("0.6").FontFamily("FontAwesome").FontBold()
+          ).Cursor("default"),
+          new HLabel(operation.Message).MarginLeft(8)
+            .Color(titleColor).FontFamily("Arial").FontSize("13px").FontBold(),
+          new HButton("",
+            new HAfter().Content(@"\f00d")
+              .FontFamily("FontAwesome").FontSize("1.15em"),
+            new HHover().Opacity("1")
+          ).FloatRight().MarginTop(-1).Color("#FFF").Opacity("0.6")
+            .Event("warning_hide", "", delegate (JsonData json)
+            {
+              operation.Reset();
+            })
+        ).Padding(6, 10, 7, 14).Background(titleBackground).BorderRadius(16)
+      ).Hide(operation.Completed || StringHlp.IsEmpty(operation.Message))
+      .MarginTop(12);
+    }
+
+    [Obsolete()]
     public static HPanel OperationState(WebOperation operation)
     {
       //HHover closeHover = new HHover().Background(Color.FromArgb(189, 216, 249));
@@ -138,25 +177,15 @@ namespace Commune.Html.Standart
           .Event("currentOperationState_Hide", "currentOperationState",
             delegate(JsonData json)
             {
-              operation.Error = "";
+              operation.Message = "";
             }
           ),
-        new HLabel(operation.Error, alert).Padding(10, 12, 8, 12)
+        new HLabel(operation.Message, alert).Padding(10, 12, 8, 12)
       ).EditContainer("currentOperationState").
-      CssAttribute("position", "absolute").Display("inline-block").
+      CssAttribute("position", "relative").Display("inline-block").
       Border("2px", "outset", Color.Blue, "2px").Color(Color.FromArgb(220, 50, 47)).
       Background(Color.LightBlue).WidthLimit("200px", "").
-      Hide(operation.Completed || StringHlp.IsEmpty(operation.Error));
-    }
-  }
-
-  public class WebOperation
-  {
-    public string Error = "";
-    public bool Completed = false;
-
-    public WebOperation()
-    {
+      Hide(operation.Completed || StringHlp.IsEmpty(operation.Message));
     }
   }
 }

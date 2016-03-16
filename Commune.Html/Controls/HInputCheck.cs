@@ -9,12 +9,12 @@ namespace Commune.Html
 {
   public class HInputCheck : ExtensionContainer, IHtmlControl
   {
-    readonly bool value;
+    readonly bool isChecked;
     readonly HStyle[] pseudoClasses;
-    public HInputCheck(string dataName, bool value, params HStyle[] pseudoClasses) :
-      base("HCheckEdit", dataName)
+    public HInputCheck(string dataName, bool isChecked, params HStyle[] pseudoClasses) :
+      base("HInputCheck", dataName)
     {
-      this.value = value;
+      this.isChecked = isChecked;
       this.pseudoClasses = pseudoClasses;
     }
 
@@ -35,7 +35,7 @@ namespace Commune.Html
       elements.Add(h.type("checkbox"));
       elements.Add(h.data("name", Name));
       elements.Add(h.data("id", Name));
-      if (value)
+      if (isChecked)
         elements.Add(h.@checked());
 
       return h.Input(HtmlHlp.ContentForHElement(this, cssClassName, elements.ToArray())

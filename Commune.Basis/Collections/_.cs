@@ -51,14 +51,7 @@ namespace Commune.Basis
       return sum;
     }
 
-    public static IEnumerable<TDest> Convert<TSource, TDest>(IEnumerable<TSource> sourceCollection, 
-      Converter<TSource, TDest> converter)
-    {
-      foreach (TSource source in sourceCollection)
-        yield return converter(source);  
-    }
-
-    public static IEnumerable<TDest> Convert<TSource, TDest>(IEnumerable sourceCollection,
+    public static IEnumerable<TDest> Convert<TDest, TSource>(IEnumerable sourceCollection,
       Getter<TDest, TSource> converter)
     {
       foreach (TSource source in sourceCollection)

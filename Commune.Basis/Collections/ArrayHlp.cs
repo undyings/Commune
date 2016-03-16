@@ -146,7 +146,7 @@ namespace Commune.Basis
       return true;
     }
 
-    public static TDest[] Convert<TSource, TDest>(ICollection sourceCollection,
+    public static TDest[] Convert<TDest, TSource>(ICollection sourceCollection,
       Getter<TDest, TSource> converter)
     {
       TDest[] result = new TDest[sourceCollection.Count];

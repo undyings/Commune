@@ -30,9 +30,29 @@ namespace Commune.Html
       return TagAttribute(control, "onclick", onClick);
     }
 
+    public static T OnChange<T>(this T control, string onChange) where T : IEditExtension
+    {
+      return TagAttribute(control, "onchange", onChange);
+    }
+
+    public static T OnKeyDown<T>(this T control, string onKeyDown) where T : IEditExtension
+    {
+      return TagAttribute(control, "onkeydown", onKeyDown);
+    }
+
     public static T TabIndex<T>(this T control, int tabIndex) where T : IEditExtension
     {
       return TagAttribute(control, "tabindex", tabIndex.ToString());
+    }
+
+    public static HLink TargetBlank(this HLink control)
+    {
+      return TagAttribute(control, "target", "_blank");
+    }
+
+    public static T Autofocus<T>(this T control) where T : IEditExtension
+    {
+      return TagAttribute(control, "autofocus", "autofocus");
     }
   }
 }

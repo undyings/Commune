@@ -13,7 +13,12 @@ namespace Commune.Html
     readonly string caption;
     readonly HStyle[] pseudoClasses;
     public HButton(string caption, params HStyle[] pseudoClasses) :
-      base("HButton", "")
+      this("", caption, pseudoClasses)
+    {
+    }
+
+    public HButton(string name, string caption, params HStyle[] pseudoClasses) :
+      base("HButton", name)
     {
       this.caption = caption;
       this.pseudoClasses = pseudoClasses;

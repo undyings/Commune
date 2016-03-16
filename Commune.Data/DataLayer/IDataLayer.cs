@@ -11,4 +11,17 @@ namespace Commune.Data
     object GetScalar(string database, string query, params DbParameter[] parameters);
     void UpdateTable(string database, string query, DataTable table);
   }
+
+  public interface IBoxConnection
+  {
+    string Database
+    {
+      get;
+    }
+
+    string TablePrefix
+    {
+      get;
+    }
+  }
 }

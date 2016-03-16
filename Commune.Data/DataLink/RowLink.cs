@@ -24,7 +24,6 @@ namespace Commune.Data
         throw new Exception(string.Format("Не найден FieldLink для поля '{0}'", name));
 
       return DataRow[field.ColumnIndex];
-      //return field.GetValue(DataRow);
     }
 
     // Extension
@@ -51,7 +50,6 @@ namespace Commune.Data
         table.RemoveIndexForRow(this);
       table.IncrementDataChangeTick();
       DataRow[field.ColumnIndex] = value;
-      //field.SetValue(DataRow, value);
       if (isIndexPart)
         table.CreateIndexForRow(this);
     }

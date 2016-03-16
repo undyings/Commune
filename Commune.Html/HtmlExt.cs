@@ -49,11 +49,35 @@ namespace Commune.Html
     public static T Event<T>(this T control, string command, string editContainer, 
       Action<JsonData> eventHandler, params object[] extraIds) where T : IEventEditExtension
     {
-      hevent onevent = new hevent(delegate(object[] ids, JsonData json)
-        {
-          eventHandler(json);
-          return null;
-        }) { { "command", command } };
+      //hevent onevent = new hevent(delegate(object[] ids, JsonData json)
+      //  {
+      //    eventHandler(json);
+      //    return null;
+      //  }) { { "command", command } };
+
+      //if (!StringHlp.IsEmpty(editContainer))
+      //  onevent.Add("container", editContainer);
+
+      //int i = -1;
+      //foreach (object id in extraIds)
+      //{
+      //  ++i;
+      //  onevent.Add(string.Format("id{0}", i + 1), id);
+      //}
+
+      hevent onevent = InnerEvent(command, editContainer, eventHandler, extraIds);
+
+      return Event(control, onevent);
+    }
+
+    public static hevent InnerEvent(string command, string editContainer,
+      Action<JsonData> eventHandler, params object[] extraIds)
+    {
+      hevent onevent = new hevent(delegate (object[] ids, JsonData json)
+      {
+        eventHandler(json);
+        return null;
+      }) { { "command", command } };
 
       if (!StringHlp.IsEmpty(editContainer))
         onevent.Add("container", editContainer);
@@ -65,14 +89,14 @@ namespace Commune.Html
         onevent.Add(string.Format("id{0}", i + 1), id);
       }
 
-      return Event(control, onevent);
+      return onevent;
     }
 
-    public static IHGrid Rows(this IHGrid grid, params object[] rows)
-    {
-      grid.WithExtension(new ExtensionAttribute("rows", rows));
-      return grid;
-    }
+    //public static IHGrid Rows(this IHGrid grid, params object[] rows)
+    //{
+    //  grid.WithExtension(new ExtensionAttribute("rows", rows));
+    //  return grid;
+    //}
 
     public static T ExtraClassNames<T>(this T control, params string[] classNames) where T : IEditExtension
     {
@@ -88,6 +112,47 @@ namespace Commune.Html
     {
       control.WithExtension(new ExtensionAttribute("unselectable", true));
       return control;
+    }
+
+    public static bool Validate(this WebOperation operation, bool isError, string errorMessage)
+    {
+      if (isError)
+      {
+        operation.Message = errorMessage;
+        return false;
+      }
+
+      return true;
+    }
+
+    public static bool Validate(this WebOperation operation, string value, string errorMessage)
+    {
+      return Validate(operation, StringHlp.IsEmpty(value), errorMessage);
+    }
+  }
+
+  public class WebOperation
+  {
+    public string Message = "";
+    public bool Completed = false;
+    public string ReturnUrl = "";
+
+    public void Reset()
+    {
+      Message = "";
+      Completed = false;
+      ReturnUrl = "";
+    }
+
+    public void Complete(string message, string returnUrl)
+    {
+      this.Completed = true;
+      this.Message = message;
+      this.ReturnUrl = returnUrl;
+    }
+
+    public WebOperation()
+    {
     }
   }
 }

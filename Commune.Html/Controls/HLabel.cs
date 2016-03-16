@@ -11,10 +11,10 @@ namespace Commune.Html
   {
     readonly string caption;
     readonly HStyle[] pseudoClasses;
-    public HLabel(string caption, params HStyle[] pseudoClasses) :
+    public HLabel(object value, params HStyle[] pseudoClasses) :
       base("HLabel", "")
     {
-      this.caption = caption;
+      this.caption = value != null ? value.ToString() : "";
       this.pseudoClasses = pseudoClasses;
     }
 
