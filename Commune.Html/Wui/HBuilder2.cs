@@ -73,5 +73,20 @@ namespace NitroBolt.Wui
     {
       return new HElement("script", h.src(jsUrl), "");
     }
+
+    public static HElement MetaKeywords(this HBuilder h, string keywords)
+    {
+      return new HElement("meta", new HAttribute("name", "keywords"), new HAttribute("content", keywords));
+    }
+
+    public static HElement MetaDescription(this HBuilder h, string description)
+    {
+      return new HElement("meta", new HAttribute("name", "description"), new HAttribute("content", description));
+    }
+
+    public static HElement Meta(this HBuilder h, string name, string content)
+    {
+      return new HElement("meta", new HAttribute("name", name), new HAttribute("content", content));
+    }
   }
 }

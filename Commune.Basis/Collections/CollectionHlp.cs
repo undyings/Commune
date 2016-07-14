@@ -145,6 +145,47 @@ namespace Commune.Basis
       return false;
     }
 
+    public static void GetDiapason<TItem, TKey>(List<TItem> sortedList,
+      Getter<TKey, TItem> keyGetter, TKey? min, TKey? max, out int minIndex, out int count) where TKey : struct
+    {
+      minIndex = 0;
+      if (min != null)
+      {
+        minIndex = _.BinarySearch(sortedList, min.Value, keyGetter);
+        if (minIndex < 0)
+          minIndex = ~minIndex;
+        else
+        {
+          for (int i = minIndex - 1; i >= 0; --i)
+          {
+            if (!ObjectHlp.IsEquals(keyGetter(sortedList[i]), min.Value))
+              break;
+            minIndex = i;
+          }
+        }
+      }
+
+      int maxIndex = sortedList.Count;
+      if (max != null)
+      {
+        maxIndex = _.BinarySearch(sortedList, max.Value, keyGetter);
+        if (maxIndex < 0)
+          maxIndex = ~maxIndex;
+        else
+        {
+          for (int i = maxIndex + 1; i < sortedList.Count; ++i)
+          {
+            if (!ObjectHlp.IsEquals(keyGetter(sortedList[i]), max.Value))
+              break;
+            maxIndex = i;
+          }
+          maxIndex++;
+        }
+      }
+
+      count = maxIndex - minIndex;
+    }
+
     public static int BinarySearch<TKey, TItem>(TItem searchItem, IList<TItem> collection,
       Getter<TKey, TItem> keyGetter, Getter<int, TKey, TKey> comparer)
     {
@@ -160,6 +201,9 @@ namespace Commune.Basis
     public static int BinarySearch<TKey, TItem>(IList<TItem> collection, TKey searchKey,
       Getter<TKey, TItem> keyGetter, Getter<int, TKey, TKey> comparer)
     {
+      if (comparer == null)
+        comparer = Comparer<TKey>.Default.Compare;
+
       int beginIndex = 0;
       int endIndex = collection.Count - 1;
       while (beginIndex <= endIndex)
@@ -183,12 +227,18 @@ namespace Commune.Basis
     }
 
     public static bool InsertInSortedList<TItem, TKey>(IList<TItem> collection, TItem insertItem,
-      Getter<TKey, TItem> keyGetter, Getter<int, TKey, TKey> comparer, bool enabledRepeats)
+      Getter<TKey, TItem> keyGetter)
+    {
+      return InsertInSortedList(collection, insertItem, keyGetter, null, false);
+    }
+
+    public static bool InsertInSortedList<TItem, TKey>(IList<TItem> collection, TItem insertItem,
+      Getter<TKey, TItem> keyGetter, Getter<int, TKey, TKey> comparer, bool disableRepeats)
     {
       int position = BinarySearch(insertItem, collection, keyGetter, comparer);
       if (position < 0)
       {
-        if (!enabledRepeats)
+        if (disableRepeats)
           return false;
         position = ~position;
       }
@@ -402,6 +452,16 @@ namespace Commune.Basis
     {
       foreach (IEnumerable<T> list in lists)
         results.AddRange(list);
+    }
+
+    public static bool Exist<T>(IEnumerable<T> items, T findItem)
+    {
+      foreach (T item in items)
+      {
+        if (object.Equals(item, findItem))
+          return true;
+      }
+      return false;
     }
 
     public static TItem Find<TItem, TKey>(IEnumerable<TItem> items, TKey key,

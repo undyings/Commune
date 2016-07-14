@@ -393,6 +393,38 @@ namespace Commune.Data
     }
   }
 
+  public class DecimalStringConverter : IFieldConverter
+  {
+    public readonly static DecimalStringConverter Default = new DecimalStringConverter();
+
+    public object ToGridValue(object databaseValue)
+    {
+      string valueAsStr = FieldConverterHlp.DatabaseValueAsString(databaseValue);
+      if (valueAsStr == null)
+        return null;
+
+      decimal gridValue;
+      if (decimal.TryParse(valueAsStr, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out gridValue))
+        return gridValue;
+      Logger.AddMessage("Ошибка преобразования значения базы данных '{0}' в decimal", databaseValue);
+      return null;
+    }
+
+    public object ToDatabaseValue(object gridValue)
+    {
+      if (gridValue == null)
+        return null;
+
+      decimal? valueAsDecimal = gridValue as decimal?;
+      if (valueAsDecimal == null)
+      {
+        Logger.AddMessage("Значение грида '{0}' не является decimal", gridValue);
+        return null;
+      }
+      return valueAsDecimal.Value.ToString(CultureInfo.InvariantCulture);
+    }
+  }
+
   public class DoubleStringConverter : IFieldConverter
   {
     public readonly static DoubleStringConverter Default = new DoubleStringConverter();

@@ -15,9 +15,14 @@ namespace Commune.Html
       return control;
     }
 
-    public static T ToolTip<T>(this T control, string toolTip) where T : IEditExtension
+    public static T Title<T>(this T control, string toolTip) where T : IEditExtension
     {
       return TagAttribute(control, "title", toolTip);
+    }
+
+    public static T Alt<T>(this T control, string altText) where T : HImage
+    {
+      return TagAttribute(control, "alt", altText);
     }
 
     public static T Placeholder<T>(this T control, string placeholder) where T : IEditExtension
@@ -53,6 +58,11 @@ namespace Commune.Html
     public static T Autofocus<T>(this T control) where T : IEditExtension
     {
       return TagAttribute(control, "autofocus", "autofocus");
+    }
+
+    public static T Nofollow<T>(this T control) where T : HLink
+    {
+      return TagAttribute(control, "rel", "nofollow");
     }
   }
 }

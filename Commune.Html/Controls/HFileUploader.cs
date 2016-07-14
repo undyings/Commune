@@ -35,7 +35,7 @@ namespace Commune.Html
     {
       List<object> content = new List<object>();
       content.Add(h.Attribute("js-init", string.Format(
-        "new qq.FileUploader({{element: this[0], action: '{0}', encoding: 'multipart', uploadButtonText: '{1}', params: {{objectId: '{2}'}} }})",
+        "new qq.FileUploader({{element: this, action: '{0}', encoding: 'multipart', uploadButtonText: '{1}', params: {{objectId: '{2}'}} }})",
         fileUploadJsPath, caption, objectId
         ))
       );

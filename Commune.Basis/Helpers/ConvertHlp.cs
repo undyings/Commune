@@ -44,6 +44,26 @@ namespace Commune.Basis
       }
     }
 
+    public static decimal? ToDecimal(object value)
+    {
+      try
+      {
+        if (value == null || value is DBNull)
+          return null;
+
+        if (value is string)
+        {
+          string s = (string)value;
+          return decimal.Parse(s.Replace(',', '.'), System.Globalization.CultureInfo.InvariantCulture);
+        }
+        return Convert.ToDecimal(value);
+      }
+      catch
+      {
+      }
+      return null;
+    }
+
     public static double? ToDouble(object value)
     {
       try
@@ -57,7 +77,7 @@ namespace Commune.Basis
         }
         return Convert.ToDouble(value);
       }
-      catch (Exception exc)
+      catch
       {
     //    TraceHlp2.WriteException(exc);
       }

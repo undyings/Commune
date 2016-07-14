@@ -38,6 +38,19 @@ namespace Commune.Html
     }
   }
 
+  public class MediaExtensionAttribute : ExtensionAttribute
+  {
+    public MediaExtensionAttribute(string queryWithBrackets, params HStyle[] styles) :
+      base(queryWithBrackets, styles)
+    {
+    }
+
+    public HStyle[] Styles
+    {
+      get { return Value as HStyle[]; }
+    }
+  }
+
   public interface IHtmlControl : IReadExtension, IEditExtension
   {
     string Name { get; }
@@ -68,6 +81,11 @@ namespace Commune.Html
     /// <param name="formatName">Например '.{0} tr:hover'. Вместо {0} автоматически подставляется наименование html контрола, который содержит псевдокласс</param>
     public HStyle(string formatName) :
       base("HStyle", formatName)
+    {
+    }
+
+    public HStyle() :
+      this(".{0}")
     {
     }
   }
@@ -132,6 +150,18 @@ namespace Commune.Html
         {
           if (extension is TagExtensionAttribute)
             yield return (TagExtensionAttribute)extension;
+        }
+      }
+    }
+
+    public IEnumerable<MediaExtensionAttribute> MediaExtensions
+    {
+      get
+      {
+        foreach (ExtensionAttribute extension in extensionByName.Values)
+        {
+          if (extension is MediaExtensionAttribute)
+            yield return (MediaExtensionAttribute)extension;
         }
       }
     }

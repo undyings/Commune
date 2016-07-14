@@ -20,6 +20,11 @@ namespace Commune.Basis
       Array.Copy(sourceArray, 0, destinationArray, destinationIndex, sourceArray.Length);
     }
 
+    public static T[] Merge<T>(T first, T[] array)
+    {
+      return Merge(new T[] { first }, array);
+    }
+
     public static T[] Merge<T>(params T[][] arrays)
     {
       int length = 0;

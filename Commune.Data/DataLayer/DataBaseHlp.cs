@@ -47,6 +47,13 @@ namespace Commune.Data
       return string.Format("{0} in ({1})", conditionColumn, StringHlp.Join(",", "{0}", conditionIds));
     }
 
+    public static string DecimalToString(decimal? value)
+    {
+      if (value == null)
+        return null;
+      return value.Value.ToString(CultureInfo.InvariantCulture);
+    }
+
     public static int GetNewId(IDataLayer dbConnection, string tableName, string idColumnName)
     {
       object maxObj = dbConnection.GetScalar("", string.Format("Select Max({0}) From {1}", idColumnName, tableName));

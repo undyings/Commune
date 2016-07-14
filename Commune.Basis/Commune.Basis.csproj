@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileStreamInfo.cs" />
     <Compile Include="Helpers\ApplicationHlp.cs" />
     <Compile Include="AsyncOperation.cs" />
     <Compile Include="Cache.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Helpers\StringHlp.cs" />
     <Compile Include="Collections\Tuple.cs" />
     <Compile Include="Logger\UserException.cs" />
+    <Compile Include="XmlSerialization.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Commune.Diagnostics\Commune.Diagnostics.csproj">

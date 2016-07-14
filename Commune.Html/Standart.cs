@@ -82,10 +82,21 @@ namespace Commune.Html
         allStyles = ArrayHlp.Merge(allStyles, prefixStyles);
 
       return new HButton(caption, allStyles)
+        .Color("black")
         .Padding(vertPadding, horPadding)
         .Border("1px", "solid", "#bbbbbb", "2px")
         .Background("#f1f1f1")
         .LinearGradient("to top right", "#dddddd", "#f1f1f1");
+    }
+
+    public static HBefore BeforeAwesome(string content, int marginRight)
+    {
+      return new HBefore().Content(content).FontFamily("FontAwesome").MarginRight(marginRight);
+    }
+
+    public static HAfter AfterAwesome(string content, int marginLeft)
+    {
+      return new HAfter().Content(content).FontFamily("FontAwesome").MarginLeft(marginLeft);
     }
 
     /// <summary>
@@ -133,6 +144,23 @@ namespace Commune.Html
       }
 
       return new HXPanel(cells);
+    }
+
+    public static void AddStyleForFileUploaderButtons(StringBuilder css)
+    {
+      HtmlHlp.AddStyleToCss(css, "qq-upload-button", new HStyle()
+        .InlineBlock()
+        .Padding(6, 12)
+        .Border("1px", "solid", "#bbbbbb", "2px")
+        .Background("#f1f1f1")
+        .LinearGradient("to top right", "#dddddd", "#f1f1f1")
+      );
+
+      HtmlHlp.AddStyleToCss(css, "qq-upload-button-hover", new HStyle()
+        .Border("1px", "solid", "#aaaaaa", "2px")
+        .Background("#eaeaea")
+        .LinearGradient("to top right", "#cccccc", "#eaeaea")
+      );
     }
 
 
@@ -183,8 +211,8 @@ namespace Commune.Html
         new HLabel(operation.Message, alert).Padding(10, 12, 8, 12)
       ).EditContainer("currentOperationState").
       CssAttribute("position", "relative").Display("inline-block").
-      Border("2px", "outset", Color.Blue, "2px").Color(Color.FromArgb(220, 50, 47)).
-      Background(Color.LightBlue).WidthLimit("200px", "").
+      Border("2px", "outset", HtmlHlp.ColorToHtml(Color.Blue), "2px").Color("#dc322f").
+      Background(HtmlHlp.ColorToHtml(Color.LightBlue)).WidthLimit("200px", "").
       Hide(operation.Completed || StringHlp.IsEmpty(operation.Message));
     }
   }

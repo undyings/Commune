@@ -9,7 +9,7 @@ namespace Commune.Html
 {
   public class HXPanel : ExtensionContainer, IHtmlControl
   {
-    readonly IHtmlControl[] controls;
+    public readonly IHtmlControl[] controls;
     public HXPanel(string name, params IHtmlControl[] controls) :
       base("HXPanel", name)
     {
@@ -26,6 +26,8 @@ namespace Commune.Html
     public HElement ToHtml(string cssClassName, StringBuilder css)
     {
       HtmlHlp.AddClassToCss(css, cssClassName, CssExtensions);
+
+      HtmlHlp.AddMediaToCss(css, cssClassName, MediaExtensions);
 
       List<object> elements = new List<object>();
  

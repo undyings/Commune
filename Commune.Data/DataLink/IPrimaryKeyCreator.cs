@@ -20,13 +20,16 @@ namespace Commune.Data
     readonly FieldBlank<int> primaryKeyField;
 
     public StandartPrimaryKeyCreator(IDataLayer dbConnection, string primaryKeyTableName, int reservationStep,
-      string tableName, FieldBlank<int> primaryKeyField)
+      string tableName, FieldBlank<int> primaryKeyField, bool isStub)
     {
       this.dbConnection = dbConnection;
       this.primaryKeyTableName = primaryKeyTableName;
       this.reservationStep = reservationStep;
       this.tableName = tableName;
       this.primaryKeyField = primaryKeyField;
+
+      if (isStub)
+        maxPrimaryKey = int.MaxValue;
     }
 
     int maxPrimaryKey = 0;
@@ -84,4 +87,21 @@ namespace Commune.Data
       primaryKeyField.Set(newRow, currentPrimaryKey);
     }
   }
+
+  //public class StubPrimaryKeyCreator : IPrimaryKeyCreator
+  //{
+  //  readonly FieldBlank<int> primaryKeyField;
+  //  public StubPrimaryKeyCreator(FieldBlank<int> primaryKeyField)
+  //  {
+  //    this.primaryKeyField = primaryKeyField;
+  //  }
+
+  //  int currentPrimaryKey = 0;
+
+  //  public void SetPrimaryKey(IRowLink newRow)
+  //  {
+  //    currentPrimaryKey++;
+  //    primaryKeyField.Set(newRow, currentPrimaryKey);
+  //  }
+  //}
 }

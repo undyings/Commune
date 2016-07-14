@@ -43,7 +43,7 @@ namespace Commune.Html
        
       List<object> elements = new List<object>(3);
       {
-        elements.Add(h.Span(caption));
+        elements.Add(caption);
 
         hevent onevent = GetExtended("onevent") as hevent;
         if (onevent != null)

@@ -13,6 +13,92 @@ namespace Commune.Html
   {
     static readonly HBuilder h = null;
 
+    public static HtmlResult FirstHtmlResult(HElement page, object state, TimeSpan? refreshPeriod)
+    {
+      return new HtmlResult
+      {
+        Html = page,
+        FirstHtmlTransformer = HtmlHlp.FirstHtmlTransformer,
+        ToHtmlText = HtmlHlp.ToHtmlText,
+        State = state,
+        RefreshPeriod = refreshPeriod
+      };
+    }
+
+    public static HElement FirstHtmlTransformer(HElement element)
+    {
+      return element;
+    }
+
+    public static string ToHtmlText(HElement element)
+    {
+      StringBuilder builder = new StringBuilder();
+      ToHtmlText(builder, element);
+      return builder.ToString();
+    }
+
+    static void ToHtmlText(StringBuilder builder, HElement element)
+    {
+      string elementType = element.Name.LocalName?.ToString();
+      builder.Append("<");
+      builder.Append(elementType);
+      foreach (var attribute in element.Attributes)
+      {
+        builder.Append(' ');
+        attribute.ToHtmlText(builder);
+      }
+      if (IsEmptyHtmlElementType(elementType))
+        builder.Append("/>");
+      else
+      {
+        if (!element.Nodes.Any())
+          builder.Append(">");
+        else
+        {
+          builder.Append(">");
+          foreach (var node in element.Nodes)
+          {
+            if (node is HElement)
+              ToHtmlText(builder, (HElement)node);
+            else if (node is HText)
+              builder.Append(HttpUtility.HtmlEncode(((HText)node).Text));
+            else
+              node.ToHtmlText(builder);
+          }
+        }
+        builder.Append("</");
+        builder.Append(elementType);
+        builder.Append(">");
+      }
+
+    }
+
+    static bool IsEmptyHtmlElementType(string elementType)
+    {
+      switch (elementType)
+      {
+        case "area":
+        case "base":
+        case "br":
+        case "col":
+        case "command":
+        case "embed":
+        case "hr":
+        case "img":
+        case "input":
+        case "keygen":
+        case "link":
+        case "meta":
+        case "param":
+        case "source":
+        case "track":
+        case "wbr":
+          return true;
+        default:
+          return false;
+      }
+    }
+
     public static IHtmlControl CKEditorCreate(string dataName, string text,
       string height, bool isRu, params string[] editorProps)
     {
@@ -27,7 +113,7 @@ namespace Commune.Html
           new HAttribute("id", dataName),
           h.@class(dataName),
           h.data("name", dataName),
-          h.Attribute("js-init", string.Format("CKEDITOR.replace(this[0], {{ {0} }})",
+          h.Attribute("js-init", string.Format("CKEDITOR.replace(this, {{ {0} }})",
             StringHlp.Join(", ", "{0}", propList)
           )),
           text
@@ -53,6 +139,16 @@ namespace Commune.Html
             ");
     }
 
+    public static HElement GoogleAnalytics()
+    {
+      return h.Script(h.type("text/javascript"), h.src("http://www.google-analytics.com/ga.js"), "");
+    }
+
+    public static HElement YandexMetrics()
+    {
+      return h.Script(h.type("text/javascript"), h.src("https://mc.yandex.ru/metrika/watch.js"), "");
+    }
+
     public static T CKEditorOnUpdateAll<T>(this T control) where T : IEditExtension
     {
       return control.OnClick("CK_updateAll();");
@@ -71,14 +167,14 @@ namespace Commune.Html
       return Parse(context.Request.QueryString[argName]);
     }
 
-    public static TState GetState<TState>(this HttpContext context)
-    {
-      UpdateCycle<HElement>[] updates = HWebSynchronizeHandler.Updates(context);
-      if (updates.Length == 0)
-        return default(TState);
+    //public static TState GetState<TState>(this HttpContext context)
+    //{
+    //  UpdateCycle<HElement>[] updates = HWebSynchronizeHandler.Updates(context);
+    //  if (updates.Length == 0)
+    //    return default(TState);
 
-      return (TState)updates[0].State;
-    }
+    //  return (TState)updates[0].State;
+    //}
 
     public static int? Parse(string arg)
     {
@@ -149,6 +245,24 @@ namespace Commune.Html
       foreach (CssExtensionAttribute extension in cssExtensions)
         css.AppendLine(string.Format("  {0}:{1};", extension.Name, extension.Value));
       css.AppendLine("}");
+    }
+
+    public static void AddMediaToCss(StringBuilder css, string cssClassName,
+      IEnumerable<MediaExtensionAttribute> mediaExtensions)
+    {
+      foreach (MediaExtensionAttribute media in mediaExtensions)
+      {
+        HStyle[] styles = media.Styles;
+        if (styles == null || styles.Length == 0)
+          continue;
+
+        css.AppendLine(string.Format("@media {0} {{", media.Name));
+        foreach (HStyle style in styles)
+        {
+          AddStyleToCss(css, cssClassName, style); 
+        }
+        css.AppendLine("}");
+      }
     }
 
     public static string BreakLongestWords(string plainText)

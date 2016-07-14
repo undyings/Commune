@@ -9,19 +9,23 @@ namespace Commune.Html
 {
   public class HLink : ExtensionContainer, IHtmlControl
   {
-    readonly IHtmlControl innerControl;
+    readonly object linkObject;
+    //readonly IHtmlControl innerControl;
     readonly string url;
     readonly HStyle[] pseudoClasses;
     public HLink(string url, string caption, params HStyle[] pseudoClasses) :
-      this(url, new HSpan(caption), pseudoClasses)
+      base("HLink", "")
     {
+      this.url = url;
+      this.linkObject = caption;
+      this.pseudoClasses = pseudoClasses;
     }
 
     public HLink(string url, IHtmlControl innerControl, params HStyle[] pseudoClasses) :
-      base("HUrl", "")
+      base("HLink", "")
     {
       this.url = url;
-      this.innerControl = innerControl;
+      this.linkObject = innerControl;
       this.pseudoClasses = pseudoClasses;
     }
 
@@ -37,9 +41,16 @@ namespace Commune.Html
       List<object> elements = new List<object>();
       elements.Add(h.href(url));
 
-      HElement innerElement = innerControl.ToHtml(string.Format("{0}_inner", cssClassName), css);
+      if (linkObject is IHtmlControl)
+      {
+        HElement innerElement = ((IHtmlControl)linkObject).ToHtml(string.Format("{0}_inner", cssClassName), css);
 
-      elements.Add(innerElement);
+        elements.Add(innerElement);
+      }
+      else
+      {
+        elements.Add(linkObject);
+      }
 
       return h.A(HtmlHlp.ContentForHElement(this, cssClassName, elements.ToArray())
       );

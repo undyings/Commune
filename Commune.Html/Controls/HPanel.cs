@@ -9,7 +9,7 @@ namespace Commune.Html
 {
   public class HPanel : ExtensionContainer, IHtmlControl
   {
-    readonly IHtmlControl[] controls;
+    public readonly IHtmlControl[] controls;
     public HPanel(string name, params IHtmlControl[] controls) :
       base("HPanel", name)
     {
@@ -26,6 +26,8 @@ namespace Commune.Html
     public HElement ToHtml(string cssClassName, StringBuilder css)
     {
       HtmlHlp.AddClassToCss(css, cssClassName, CssExtensions);
+
+      HtmlHlp.AddMediaToCss(css, cssClassName, MediaExtensions);
 
       List<object> elements = new List<object>();
 
@@ -47,8 +49,6 @@ namespace Commune.Html
         bool isHide = (control.GetExtended("hide") as bool?) ?? false;
         if (!isHide)
           elements.Add(element);        
-
-        //elements.Add(h.Div(element));
       }
 
       return h.Div(HtmlHlp.ContentForHElement(this, cssClassName, elements.ToArray()));

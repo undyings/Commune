@@ -22,6 +22,13 @@ namespace Commune.Html
       return data.ToString();
     }
 
+    public static T Media<T>(this T control, string queryWithBrackets, params HStyle[] styles)
+      where T : IEditExtension
+    {
+      control.WithExtension(new MediaExtensionAttribute(queryWithBrackets, styles));
+      return control;
+    }
+
     public static T Hide<T>(this T control, bool hide) where T : IEditExtension
     {
       control.WithExtension(new ExtensionAttribute("hide", hide));
@@ -49,22 +56,6 @@ namespace Commune.Html
     public static T Event<T>(this T control, string command, string editContainer, 
       Action<JsonData> eventHandler, params object[] extraIds) where T : IEventEditExtension
     {
-      //hevent onevent = new hevent(delegate(object[] ids, JsonData json)
-      //  {
-      //    eventHandler(json);
-      //    return null;
-      //  }) { { "command", command } };
-
-      //if (!StringHlp.IsEmpty(editContainer))
-      //  onevent.Add("container", editContainer);
-
-      //int i = -1;
-      //foreach (object id in extraIds)
-      //{
-      //  ++i;
-      //  onevent.Add(string.Format("id{0}", i + 1), id);
-      //}
-
       hevent onevent = InnerEvent(command, editContainer, eventHandler, extraIds);
 
       return Event(control, onevent);
@@ -91,12 +82,6 @@ namespace Commune.Html
 
       return onevent;
     }
-
-    //public static IHGrid Rows(this IHGrid grid, params object[] rows)
-    //{
-    //  grid.WithExtension(new ExtensionAttribute("rows", rows));
-    //  return grid;
-    //}
 
     public static T ExtraClassNames<T>(this T control, params string[] classNames) where T : IEditExtension
     {

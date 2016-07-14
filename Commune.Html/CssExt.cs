@@ -169,12 +169,6 @@ namespace Commune.Html
       );
     }
 
-    public static T Border<T>(this T control,
-      string width, string style, Color color, string radius) where T : IEditExtension
-    {
-      return Border(control, width, style, HtmlHlp.ColorToHtml(color), radius);
-    }
-
     public static T BorderRadius<T>(this T control, int radius) where T : IEditExtension
     {
       return BorderRadius(control, string.Format("{0}px", radius));
@@ -200,10 +194,20 @@ namespace Commune.Html
       return CssAttribute(control, "white-space", "nowrap");
     }
 
+    public static T Wrap<T>(this T control) where T : IEditExtension
+    {
+      return CssAttribute(control, "white-space", "normal");
+    }
+
     public static T CssAttribute<T>(this T control, string extensionName, object extensionValue) where T : IEditExtension
     {
       control.WithExtension(new CssExtensionAttribute(extensionName, extensionValue));
       return control;
+    }
+
+    public static T FontSize<T>(this T control, int fontSize) where T : IEditExtension
+    {
+      return FontSize(control, string.Format("{0}px", fontSize));
     }
 
     public static T FontSize<T>(this T control, string fontSize) where T : IEditExtension
@@ -211,19 +215,9 @@ namespace Commune.Html
       return CssAttribute(control, "font-size", fontSize);
     }
 
-    public static T Color<T>(this T control, Color color) where T : IEditExtension
-    {
-      return CssAttribute(control, "color", HtmlHlp.ColorToHtml(color));
-    }
-
     public static T Color<T>(this T control, string color) where T : IEditExtension
     {
       return CssAttribute(control, "color", color);
-    }
-
-    public static T Background<T>(this T control, Color color) where T : IEditExtension
-    {
-      return CssAttribute(control, "background", HtmlHlp.ColorToHtml(color));
     }
 
     public static T Background<T>(this T control, string color) where T : IEditExtension
@@ -295,6 +289,12 @@ namespace Commune.Html
       return control;
     }
 
+    public static T WidthFixed<T>(this T control, int width) where T : IEditExtension
+    {
+      string widthPx = string.Format("{0}px", width);
+      return control.WidthLimit(widthPx, widthPx);
+    }
+
     public static T WidthFill<T>(this T control, int minWidth, int maxWidth) where T : IEditExtension
     {
       Width(control, string.Format("{0}px", maxWidth));
@@ -337,6 +337,22 @@ namespace Commune.Html
       if (!StringHlp.IsEmpty(maxHeight))
         CssAttribute(control, "max-height", maxHeight);
       return control;
+    }
+
+    public static T HeightFixed<T>(this T control, int height) where T : IEditExtension
+    {
+      string heightPx = string.Format("{0}px", height);
+      return control.HeightLimit(heightPx, heightPx);
+    }
+
+    public static T PositionAbsolute<T>(this T control) where T : IEditExtension
+    {
+      return control.CssAttribute("position", "absolute");
+    }
+
+    public static T PositionRelative<T>(this T control) where T : IEditExtension
+    {
+      return control.CssAttribute("position", "relative");
     }
 
     public static T Align<T>(this T control, bool? isLeft) where T : IEditExtension
@@ -425,6 +441,11 @@ namespace Commune.Html
       return FontBold(control, true);
     }
 
+    public static T FontItalic<T>(this T control) where T : IEditExtension
+    {
+      return CssAttribute(control, "font-style", "italic");
+    }
+
     public static T FontFamily<T>(this T control, string fontFamily) where T : IEditExtension
     {
       return CssAttribute(control, "font-family", string.Format("'{0}'", fontFamily));
@@ -435,9 +456,51 @@ namespace Commune.Html
       return CssAttribute(control, "text-decoration", decoration);
     }
 
+    public static T TextShadow<T>(this T control, string shadow) where T : IEditExtension
+    {
+      return CssAttribute(control, "text-shadow", shadow);
+    }
+
+    public static T TextShadow3D<T>(this T control, string color, int debth) where T : IEditExtension
+    {
+      string[] shadows = new string[debth];
+      for (int i = 0; i < debth; ++i)
+      {
+        shadows[i] = string.Format("{0} {1}px {1}px 0", color, i + 1);
+      }
+      string shadow3d = string.Join(", ", shadows);
+      return control.TextShadow(shadow3d);
+    }
+
+    public static T TextShadowContour<T>(this T control, string color) where T : IEditExtension
+    {
+      string[] shadows = new string[4];
+
+      int[] shifts = new int[] { -1, 1 };
+      for (int i = 0; i < 2; ++i)
+        for (int j = 0; j < 2; ++j)
+        {
+          shadows[j*2 + i] = string.Format("{0} {1}px {2}px 0", color, shifts[i], shifts[j]);
+        }
+      string contour = string.Join(", ", shadows);
+      return control.TextShadow(contour);
+    }
+
+    public static T Transform<T>(this T control, string transform) where T : IEditExtension
+    {
+      CssAttribute(control, "-webkit-transform", transform);
+      CssAttribute(control, "-ms-transform", transform);
+      return CssAttribute(control, "transform", transform);
+    }
+
     public static T Opacity<T>(this T control, string opacity) where T : IEditExtension
     {
       return CssAttribute(control, "opacity", opacity);
+    }
+
+    public static T LineHeight<T>(this T control, int lineHeight) where T : IEditExtension
+    {
+      return LineHeight(control, string.Format("{0}px", lineHeight));
     }
 
     public static T LineHeight<T>(this T control, string lineHeight) where T : IEditExtension
@@ -475,6 +538,11 @@ namespace Commune.Html
       return CssAttribute(control, "float", floats);
     }
 
+    public static T FloatLeft<T>(this T control) where T : IEditExtension
+    {
+      return Float(control, "left");
+    }
+
     public static T FloatRight<T>(this T control) where T : IEditExtension
     {
       return Float(control, "right");
@@ -483,6 +551,11 @@ namespace Commune.Html
     public static T Delay<T>(this T control, int delayInMilliseconds) where T : IEditExtension
     {
       return CssAttribute(control, "transition-delay", string.Format("{0}ms", delayInMilliseconds));
+    }
+
+    public static T MediaBlock<T>(this T control, bool? isLeft = null) where T : IEditExtension
+    {
+      return control.Block().Width("100%").BoxSizing().Align(isLeft);
     }
   }
 }

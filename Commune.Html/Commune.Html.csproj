@@ -73,6 +73,7 @@
     <Compile Include="Controls\HCheckEdit.cs" />
     <Compile Include="Controls\HDropdown.cs" />
     <Compile Include="Controls\HElementControl.cs" />
+    <Compile Include="Controls\HH1.cs" />
     <Compile Include="Controls\HInputButton.cs" />
     <Compile Include="Controls\HInputCheck.cs" />
     <Compile Include="Controls\HComboEdit.cs" />
@@ -82,10 +83,10 @@
     <Compile Include="Controls\HLabel.cs" />
     <Compile Include="Controls\HLink.cs" />
     <Compile Include="Controls\HPasswordEdit.cs" />
-    <Compile Include="Controls\HSearchEdit.cs" />
     <Compile Include="Controls\HSeparator.cs" />
     <Compile Include="Controls\HSpan.cs" />
     <Compile Include="Controls\HSpoiler.cs" />
+    <Compile Include="Controls\HSpoilerPanel.cs" />
     <Compile Include="Controls\HTextArea.cs" />
     <Compile Include="Controls\HTextView.cs" />
     <Compile Include="Controls\HTextEdit.cs" />
