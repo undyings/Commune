@@ -11,6 +11,21 @@ namespace Commune.Basis
 {
   public class StringHlp
   {
+    public static string GetMeasureUnitWithEnding(int numeral, string root,
+      string ending1, string ending2_4, string ending5_10)
+    {
+      int hundredRemainder = numeral % 100;
+      if (hundredRemainder >= 10 && hundredRemainder <= 20)
+        return root + ending5_10;
+      int tenRemainder = numeral % 10;
+      if (tenRemainder == 0 || (tenRemainder >= 5 && tenRemainder <= 9))
+        return root + ending5_10;
+      if (tenRemainder >= 2 && tenRemainder <= 4)
+        return root + ending2_4;
+      return root + ending1;
+    }
+
+
     #region Latin
     public static string Latin(string str)
     {

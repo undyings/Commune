@@ -1,0 +1,9 @@
+D:\Projects\Commune\Commune.Forms\bin\Release\Commune.Forms.dll
+D:\Projects\Commune\Commune.Forms\bin\Release\Commune.Forms.pdb
+D:\Projects\Commune\Commune.Forms\bin\Release\Commune.Basis.dll
+D:\Projects\Commune\Commune.Forms\bin\Release\Commune.Diagnostics.dll
+D:\Projects\Commune\Commune.Forms\bin\Release\Commune.Basis.pdb
+D:\Projects\Commune\Commune.Forms\bin\Release\Commune.Diagnostics.pdb
+D:\Projects\Commune\Commune.Forms\obj\Release\Commune.Forms.csprojResolveAssemblyReference.cache
+D:\Projects\Commune\Commune.Forms\obj\Release\Commune.Forms.dll
+D:\Projects\Commune\Commune.Forms\obj\Release\Commune.Forms.pdb

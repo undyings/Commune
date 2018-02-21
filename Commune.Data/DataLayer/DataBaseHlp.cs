@@ -3,11 +3,46 @@ using System.Collections.Generic;
 using System.Text;
 using Commune.Basis;
 using System.Globalization;
+using System.Data;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 namespace Commune.Data
 {
   public static class DatabaseHlp
   {
+    public static byte[] SerializeDataTable(DataTable dt)
+    {
+      foreach (DataColumn column in dt.Columns)
+      {
+        if (column.DataType == typeof(DateTime))
+        {
+          column.DateTimeMode = DataSetDateTime.Unspecified;
+        }
+      }
+
+      BinaryFormatter bFormat = new BinaryFormatter();
+      byte[] outList = null;
+      dt.RemotingFormat = SerializationFormat.Binary;
+      using (MemoryStream ms = new MemoryStream())
+      {
+        bFormat.Serialize(ms, dt);
+        outList = ms.ToArray();
+      }
+      return outList;
+    }
+
+    public static DataTable DeserializeDataTable(byte[] dtData)
+    {
+      DataTable dt = null;
+      BinaryFormatter bFormat = new BinaryFormatter();
+      using (MemoryStream ms = new MemoryStream(dtData))
+      {
+        dt = (DataTable)bFormat.Deserialize(ms);
+      }
+      return dt;
+    }
+
     public static void SafeRenameTable(IDataLayer dbConnection, string database, string oldTableName,
       string newTableName)
     {

@@ -272,11 +272,34 @@ namespace Commune.Data
 
     public object ToGridValue(object databaseValue)
     {
+      return Convert.ToInt32(databaseValue);
+      //return (int)(long)databaseValue;
+    }
+
+    public object ToDatabaseValue(object gridValue)
+    {
+      return gridValue;
+      //return (long)(int)gridValue;
+    }
+  }
+
+  public class IntNullableLongConverter : IFieldConverter
+  {
+    public readonly static IntNullableLongConverter Default = new IntNullableLongConverter();
+
+    public object ToGridValue(object databaseValue)
+    {
+      if (databaseValue == null)
+        return null;
+
       return (int)(long)databaseValue;
     }
 
     public object ToDatabaseValue(object gridValue)
     {
+      if (gridValue == null)
+        return null;
+
       return (long)(int)gridValue;
     }
   }

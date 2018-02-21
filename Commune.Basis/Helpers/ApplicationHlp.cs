@@ -102,14 +102,20 @@ namespace Commune.Basis
         return string.Format("Программа '{0}'\r\nВерсия '{1}'\r\nИстория изменений:\r\n{2}\r\n", Name, Version, History);
       }
     }
-    //public static bool IsDevelopment
-    //{
-    //  get
-    //  {
-    //    return ConvertHlp.ToTypeOrDefault<bool>(
-    //      System.Configuration.ConfigurationManager.AppSettings["IsDevelopment"]) ^
-    //      Form.ModifierKeys == (Keys.Alt | Keys.Control | Keys.Shift);
-    //  }
-    //}
+
+    public static void RemoveOldFiles(string dir, string searchPattern, int maxFiles)
+    {
+      string[] files = Directory.GetFiles(dir, searchPattern);
+      if (files.Length > maxFiles)
+      {
+        Array.Sort(files);
+
+        for (int i = 0; i < files.Length - maxFiles; i++)
+        {
+          try { File.Delete(files[i]); }
+          catch (Exception exc) { Logger.WriteException(exc); }
+        }
+      }
+    }
   }
 }

@@ -1,0 +1,16 @@
+d:\Projects\AlarmServer\MySqlDataLayer\bin\Release\MySqlDataLayer.dll
+d:\Projects\AlarmServer\MySqlDataLayer\bin\Release\MySqlDataLayer.pdb
+d:\Projects\AlarmServer\MySqlDataLayer\bin\Release\Commune.Basis.dll
+d:\Projects\AlarmServer\MySqlDataLayer\bin\Release\Commune.Data.dll
+d:\Projects\AlarmServer\MySqlDataLayer\bin\Release\MySql.Data.dll
+d:\Projects\AlarmServer\MySqlDataLayer\bin\Release\Commune.Diagnostics.dll
+d:\Projects\AlarmServer\MySqlDataLayer\obj\Release\MySqlDataLayer.csprojResolveAssemblyReference.cache
+d:\Projects\AlarmServer\MySqlDataLayer\obj\Release\MySqlDataLayer.dll
+d:\Projects\AlarmServer\MySqlDataLayer\obj\Release\MySqlDataLayer.pdb
+d:\Projects\Commune\MySqlDataLayer\bin\Release\MySqlDataLayer.dll
+d:\Projects\Commune\MySqlDataLayer\bin\Release\MySqlDataLayer.pdb
+d:\Projects\Commune\MySqlDataLayer\bin\Release\MySql.Data.dll
+d:\Projects\Commune\MySqlDataLayer\bin\Release\Commune.Diagnostics.dll
+d:\Projects\Commune\MySqlDataLayer\obj\Release\MySqlDataLayer.csprojResolveAssemblyReference.cache
+d:\Projects\Commune\MySqlDataLayer\obj\Release\MySqlDataLayer.dll
+d:\Projects\Commune\MySqlDataLayer\obj\Release\MySqlDataLayer.pdb

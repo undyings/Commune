@@ -65,14 +65,15 @@ namespace Commune.Task
     public bool IsFinishing
     {
       get { return isFinishing; }
-      set
+    }
+
+    public void Finish()
+    {
+      isFinishing = true;
+      if (isFinishing)
       {
-        isFinishing = value;
-        if (isFinishing)
-        {
-          foreach (BackgroundPullThread thread in threadByLabel.Values)
-            thread.IsFinishing = true;
-        }
+        foreach (BackgroundPullThread thread in threadByLabel.Values)
+          thread.Finish();
       }
     }
 

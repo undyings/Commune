@@ -29,7 +29,7 @@ namespace Commune.Diagnostics
         return Path.ChangeExtension(System.Reflection.Assembly.GetEntryAssembly().Location, ".log");
       }
     }
-    public static readonly long DefaultMaxLogSize = 100 * 1024 * 1024;
+    public static readonly long DefaultMaxLogSize = 2 * 1024 * 1024;
 
     static StreamWriter CaptureLogFile(string baseLogFilePath, out string logFilePath)
     {

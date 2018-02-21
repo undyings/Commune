@@ -46,7 +46,13 @@ namespace Commune.Task
       }
     }
 
-    public volatile bool IsFinishing = false;
+    public void Finish()
+    {
+      isFinishing = true;
+      waitHandle.Set();
+    }
+
+    volatile bool isFinishing = false;
 
     readonly TaskQueue taskQueue = new TaskQueue();
 
@@ -60,7 +66,7 @@ namespace Commune.Task
       try
       {
         int? timeoutMilliseconds = null;
-        while (!IsFinishing)
+        while (!isFinishing)
         {
           if (timeoutMilliseconds != null)
           {

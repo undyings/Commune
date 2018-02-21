@@ -10,6 +10,7 @@ namespace Commune.Data
     DataTable GetTable(string database, string query, params DbParameter[] parameters);
     object GetScalar(string database, string query, params DbParameter[] parameters);
     void UpdateTable(string database, string query, DataTable table);
+    string DbParamPrefix { get; }
   }
 
   public interface IBoxConnection

@@ -22,3 +22,15 @@ c:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Html
 c:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Html\obj\Release\Commune.Html.pdb
 C:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Html\bin\Release\Newtonsoft.Json.dll
 C:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Html\bin\Release\NitroBolt.Functional.dll
+D:\Projects\Commune\Commune.Html\bin\Release\Commune.Html.dll
+D:\Projects\Commune\Commune.Html\bin\Release\Commune.Html.pdb
+D:\Projects\Commune\Commune.Html\bin\Release\Commune.Basis.dll
+D:\Projects\Commune\Commune.Html\bin\Release\NitroBolt.Wui.dll
+D:\Projects\Commune\Commune.Html\bin\Release\Commune.Diagnostics.dll
+D:\Projects\Commune\Commune.Html\bin\Release\Newtonsoft.Json.dll
+D:\Projects\Commune\Commune.Html\bin\Release\NitroBolt.Functional.dll
+D:\Projects\Commune\Commune.Html\bin\Release\Commune.Basis.pdb
+D:\Projects\Commune\Commune.Html\bin\Release\Commune.Diagnostics.pdb
+D:\Projects\Commune\Commune.Html\obj\Release\Commune.Html.csprojResolveAssemblyReference.cache
+D:\Projects\Commune\Commune.Html\obj\Release\Commune.Html.dll
+D:\Projects\Commune\Commune.Html\obj\Release\Commune.Html.pdb

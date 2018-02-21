@@ -14,23 +14,31 @@ namespace Commune.Html
     readonly bool isAfterIcon;
     readonly IHtmlControl captionControl;
     readonly IHtmlControl blockControl;
+    readonly bool isOpen;
     readonly HStyle[] pseudoClasses;
-    public HSpoilerPanel(IHtmlControl openingIcon, IHtmlControl closingIcon, bool isAfterIcon,
-      IHtmlControl captionControl, IHtmlControl blockControl,
+    public HSpoilerPanel(string checkDataName, IHtmlControl openingIcon, IHtmlControl closingIcon, 
+      bool isAfterIcon, IHtmlControl captionControl, IHtmlControl blockControl, bool isOpen,
       params HStyle[] pseudoClasses) :
-      base("HSpoiler", "")
+      base("HSpoiler", checkDataName)
     {
       this.openingIcon = openingIcon;
       this.closingIcon = closingIcon;
       this.isAfterIcon = isAfterIcon;
       this.captionControl = captionControl;
       this.blockControl = blockControl;
+      this.isOpen = isOpen;
       this.pseudoClasses = pseudoClasses;
+    }
+
+    public HSpoilerPanel(string checkDataName, IHtmlControl openingControl, IHtmlControl closingControl,
+      IHtmlControl blockControl, bool isOpen, params HStyle[] pseudoClasses) :
+      this(checkDataName, openingControl, closingControl, false, new HPanel(), blockControl, isOpen, pseudoClasses)
+    {
     }
 
     public HSpoilerPanel(IHtmlControl captionControl, IHtmlControl blockControl,
       params HStyle[] pseudoClasses) :
-        this(null, null, false, captionControl, blockControl, pseudoClasses)
+        this(null, null, null, false, captionControl, blockControl, false, pseudoClasses)
     {
     }
 
@@ -62,6 +70,9 @@ namespace Commune.Html
 
       if (openingIcon != null)
       {
+        DefaultExtensionContainer defaults = new DefaultExtensionContainer(openingIcon);
+        defaults.Cursor(CursorStyle.Pointer);
+
         elements.Add(openingIcon.ToHtml(openingIconCssName, css));
 
         HtmlHlp.AddClassToCss(css, string.Format("{0} input[type=checkbox] + div .{1} ",
@@ -76,6 +87,9 @@ namespace Commune.Html
       }
       if (closingIcon != null)
       {
+        DefaultExtensionContainer defaults = new DefaultExtensionContainer(closingIcon);
+        defaults.Cursor(CursorStyle.Pointer);
+
         elements.Add(closingIcon.ToHtml(closingIconCssName, css));
 
         HtmlHlp.AddClassToCss(css, string.Format("{0} input[type=checkbox] + div .{1} ",
@@ -109,12 +123,27 @@ namespace Commune.Html
         new CssExtensionAttribute[] { new CssExtensionAttribute("display", "block") }
       );
 
+      List<object> checkElements = new List<object>();
+      checkElements.Add(h.type("checkbox"));
+      if (isOpen)
+        checkElements.Add(h.@checked());
+
+      if (!StringHlp.IsEmpty(Name))
+      {
+        checkElements.Add(h.data("name", Name));
+        checkElements.Add(h.data("id", Name));
+      }
+      HElement innerCheck = h.Input(checkElements.ToArray());
+
+      checkElements.Add(h.@class(checkCssName));
+      HElement spoilerCheck = h.Input(checkElements.ToArray());
+
       return h.Div(h.@class(cssClassName),
         new HElement("label",
-          h.Input(h.type("checkbox")),
+          innerCheck,
           h.Div(elements.ToArray())
         ),
-        h.Input(h.type("checkbox"), h.@class(checkCssName)),
+        spoilerCheck,
         blockControl.ToHtml(blockCssName, css)
       );
     }

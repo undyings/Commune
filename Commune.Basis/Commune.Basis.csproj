@@ -45,6 +45,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Binary\Binary.cs" />
+    <Compile Include="Binary\BinaryHlp.cs" />
+    <Compile Include="Binary\Byte.cs" />
+    <Compile Include="Collections\TuneContainer.cs" />
     <Compile Include="FileStreamInfo.cs" />
     <Compile Include="Helpers\ApplicationHlp.cs" />
     <Compile Include="AsyncOperation.cs" />
@@ -63,11 +67,14 @@
     <Compile Include="Functors.cs" />
     <Compile Include="Collections\IntervalUnion.cs" />
     <Compile Include="Helpers\ConvertHlp.cs" />
+    <Compile Include="Helpers\PointD.cs" />
     <Compile Include="LazyMaker.cs" />
     <Compile Include="Helpers\MathHlp.cs" />
     <Compile Include="Helpers\ObjectHlp.cs" />
     <Compile Include="Logger\Logger.cs" />
+    <Compile Include="Logger\StateSaver.cs" />
     <Compile Include="Logger\TestStopwatch.cs" />
+    <Compile Include="Logger\XmlEmbeddingWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\StringHlp.cs" />
     <Compile Include="Collections\Tuple.cs" />

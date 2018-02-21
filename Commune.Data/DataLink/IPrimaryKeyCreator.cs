@@ -14,15 +14,18 @@ namespace Commune.Data
   public class StandartPrimaryKeyCreator : IPrimaryKeyCreator
   {
     readonly IDataLayer dbConnection;
+    readonly string database;
     readonly string primaryKeyTableName;
     readonly int reservationStep;
     readonly string tableName;
     readonly FieldBlank<int> primaryKeyField;
 
-    public StandartPrimaryKeyCreator(IDataLayer dbConnection, string primaryKeyTableName, int reservationStep,
+    public StandartPrimaryKeyCreator(IDataLayer dbConnection, string database,
+      string primaryKeyTableName, int reservationStep,
       string tableName, FieldBlank<int> primaryKeyField, bool isStub)
     {
       this.dbConnection = dbConnection;
+      this.database = database;
       this.primaryKeyTableName = primaryKeyTableName;
       this.reservationStep = reservationStep;
       this.tableName = tableName;
@@ -38,7 +41,7 @@ namespace Commune.Data
     {
       if (currentPrimaryKey >= maxPrimaryKey)
       {
-        object rawNewPrimaryKey = dbConnection.GetScalar("", string.Format(@"
+        object rawNewPrimaryKey = dbConnection.GetScalar(database, string.Format(@"
         update {0} set max_primary_key = max_primary_key + {1} where table_name = '{2}';
         select max_primary_key from {0} where table_name = '{2}';",
           primaryKeyTableName, reservationStep, tableName));

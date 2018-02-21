@@ -27,6 +27,8 @@ namespace Commune.Html
     {
       HtmlHlp.AddClassToCss(css, cssClassName, CssExtensions);
 
+      HtmlHlp.AddMediaToCss(css, cssClassName, MediaExtensions);
+
       return h.Input(HtmlHlp.ContentForHElement(this, cssClassName,
         h.type("text"), h.data("name", Name), h.value(value), h.data("id", Name))
       );

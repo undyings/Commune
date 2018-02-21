@@ -69,10 +69,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthHlp.cs" />
+    <Compile Include="Controls\HAnchor.cs" />
     <Compile Include="Controls\HButton.cs" />
+    <Compile Include="Controls\HCheckButton.cs" />
     <Compile Include="Controls\HCheckEdit.cs" />
+    <Compile Include="Controls\HDiapasonSlider.cs" />
     <Compile Include="Controls\HDropdown.cs" />
     <Compile Include="Controls\HElementControl.cs" />
+    <Compile Include="Controls\HEventPanel.cs" />
     <Compile Include="Controls\HH1.cs" />
     <Compile Include="Controls\HInputButton.cs" />
     <Compile Include="Controls\HInputCheck.cs" />
@@ -80,8 +84,11 @@
     <Compile Include="Controls\HImage.cs" />
     <Compile Include="Controls\HFileUploader.cs" />
     <Compile Include="Controls\HInputRadio.cs" />
+    <Compile Include="Controls\HIonCalendar.cs" />
+    <Compile Include="Controls\HIonSlider.cs" />
     <Compile Include="Controls\HLabel.cs" />
     <Compile Include="Controls\HLink.cs" />
+    <Compile Include="Controls\HList.cs" />
     <Compile Include="Controls\HPasswordEdit.cs" />
     <Compile Include="Controls\HSeparator.cs" />
     <Compile Include="Controls\HSpan.cs" />
@@ -106,6 +113,7 @@
     <Compile Include="IHtmlControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pseudo.cs" />
+    <Compile Include="SchemaOrg.cs" />
     <Compile Include="Standart.cs" />
     <Compile Include="TagExt.cs" />
     <Compile Include="Wui\HBuilder2.cs" />

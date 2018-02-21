@@ -88,5 +88,13 @@ namespace NitroBolt.Wui
     {
       return new HElement("meta", new HAttribute("name", name), new HAttribute("content", content));
     }
+
+    public static HElement OpenGraph(this HBuilder h, string ogType, string content)
+    {
+      return new HElement("meta", 
+        new HAttribute("property", string.Format("og:{0}", ogType)),
+        new HAttribute("content", content)
+      );
+    }
   }
 }

@@ -30,9 +30,10 @@ namespace Commune.Html
     {
       {
         DefaultExtensionContainer defaults = new DefaultExtensionContainer(this);
-        defaults.Display("inline-block");
+        defaults.InlineBlock();
         defaults.Cursor(CursorStyle.Pointer);
         CssExt.CssAttribute(defaults, "white-space", "nowrap");
+        defaults.UserSelect("none");
         defaults.OnClick(";");
       }
 
@@ -40,7 +41,9 @@ namespace Commune.Html
 
       foreach (HStyle pseudo in pseudoClasses)
         HtmlHlp.AddStyleToCss(css, cssClassName, pseudo);
-       
+
+      HtmlHlp.AddMediaToCss(css, cssClassName, MediaExtensions);
+
       List<object> elements = new List<object>(3);
       {
         elements.Add(caption);

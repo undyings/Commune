@@ -64,6 +64,27 @@ namespace Commune.Basis
       return null;
     }
 
+    public static float? ToFloat(object value)
+    {
+      try
+      {
+        if (value == null || value is DBNull)
+          return null;
+
+        if (value is string)
+        {
+          string s = (string)value;
+          return float.Parse(s.Replace(',', '.'), System.Globalization.CultureInfo.InvariantCulture);
+        }
+
+        return Convert.ToSingle(value);
+      }
+      catch
+      {
+        return null;
+      }
+    }
+
     public static double? ToDouble(object value)
     {
       try

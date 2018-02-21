@@ -38,6 +38,9 @@ namespace Commune.Html
       int index = -1;
       foreach (IHtmlControl control in controls)
       {
+        if (control == null)
+          continue;
+
         index++;
 
         if (control is IEditExtension)

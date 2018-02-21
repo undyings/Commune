@@ -35,6 +35,11 @@ namespace Commune.Html
       return TagAttribute(control, "onclick", onClick);
     }
 
+    public static T OnClickWithStopPropagation<T>(this T control) where T : IEditExtension
+    {
+      return OnClick(control, "e.stopPropagation();");
+    }
+
     public static T OnChange<T>(this T control, string onChange) where T : IEditExtension
     {
       return TagAttribute(control, "onchange", onChange);

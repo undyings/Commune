@@ -1,0 +1,12 @@
+D:\Projects\Commune\SqLiteDataLayer\bin\Release\SqLiteDataLayer.dll
+D:\Projects\Commune\SqLiteDataLayer\bin\Release\SqLiteDataLayer.pdb
+D:\Projects\Commune\SqLiteDataLayer\bin\Release\Commune.Basis.dll
+D:\Projects\Commune\SqLiteDataLayer\bin\Release\Commune.Data.dll
+D:\Projects\Commune\SqLiteDataLayer\bin\Release\System.Data.SQLite.dll
+D:\Projects\Commune\SqLiteDataLayer\bin\Release\Commune.Diagnostics.dll
+D:\Projects\Commune\SqLiteDataLayer\bin\Release\Commune.Basis.pdb
+D:\Projects\Commune\SqLiteDataLayer\bin\Release\Commune.Data.pdb
+D:\Projects\Commune\SqLiteDataLayer\bin\Release\Commune.Diagnostics.pdb
+D:\Projects\Commune\SqLiteDataLayer\obj\Release\SqLiteDataLayer.csprojResolveAssemblyReference.cache
+D:\Projects\Commune\SqLiteDataLayer\obj\Release\SqLiteDataLayer.dll
+D:\Projects\Commune\SqLiteDataLayer\obj\Release\SqLiteDataLayer.pdb

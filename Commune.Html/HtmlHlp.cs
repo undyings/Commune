@@ -99,11 +99,75 @@ namespace Commune.Html
       }
     }
 
+    static TimeSpan? ParseTimezone(string browserTime)
+    {
+      if (StringHlp.IsEmpty(browserTime))
+        return null;
+
+      int index = browserTime.ToUpper().IndexOf("GMT+");
+      if (index < 0)
+        return null;
+
+      if (index + 8 > browserTime.Length)
+        return null;
+
+      ushort rawTimezone;
+      if (!ushort.TryParse(browserTime.Substring(index + 4, 4), out rawTimezone))
+        return null;
+
+      return new TimeSpan(rawTimezone / 100, rawTimezone % 100, 0);
+    }
+
+    public static IHtmlControl TimezoneScriptControl(Executter<TimeSpan?> timezoneSetter)
+    {
+      return new HPanel(
+        new HTextEdit("timezone"),
+        new HButton("timezone_btn", "timezone")
+          .Event("timezone_command", "timezone_content", delegate (JsonData json)
+          {
+            string rawTimezone = json.GetText("timezone");
+            TimeSpan? timezone = ParseTimezone(rawTimezone);
+            if (timezone == null)
+              Logger.AddMessage("Ошибка парсинга timezone: '{0}'", rawTimezone);
+            timezoneSetter(timezone);
+          }),
+        new HElementControl(
+          h.Script(h.Raw("$(function () {{ $('.timezone').val(new Date()); }}); $('.timezone_btn').click();")),
+          "timezone_script"
+        )
+      ).EditContainer("timezone_content").Display("none");
+    }
+
+    public static HElement DiapasonSlider(string cssClassName, float min, float max,
+      float value1, float value2)
+    {
+      return h.Script(h.Raw(string.Format(@"
+        $('#{0}').slider({{
+          range: true,
+          min: {1},
+          max: {2},
+          values: [{3}, {4}],
+          slide: function( event, ui ) {{ ;
+            }}
+        }});",
+        cssClassName, min, max, value1, value2
+      )));
+    }
+
+    public static HElement RedirectScript(string redirectUrl)
+    {
+      if (StringHlp.IsEmpty(redirectUrl))
+        return null;
+
+      return h.Script(h.type("text/javascript"), string.Format(@"$(location).attr('href','{0}');", redirectUrl));
+    }
+
     public static IHtmlControl CKEditorCreate(string dataName, string text,
       string height, bool isRu, params string[] editorProps)
     {
       List<string> propList = new List<string>();
       propList.Add(string.Format("height: '{0}'", height));
+      propList.Add(string.Format("extraPlugins: 'justify,colorbutton,indentblock,textselection'"));
       if (isRu)
         propList.Add("language: 'ru'");
       propList.AddRange(editorProps);
@@ -137,6 +201,47 @@ namespace Commune.Html
                  }
                }
             ");
+    }
+
+    public static HElement SchemaOrg(SchemaOrg schema)
+    {
+      if (schema == null)
+        return null;
+
+      return h.Script(h.type("application/ld+json"),
+        h.Raw(string.Format(
+@"{{
+  ""@context"": ""http://schema.org"",
+  ""@type"": ""{0}"",
+  ""mainEntityOfPage"": {{
+    ""@type"": ""WebPage"",
+    ""@id"": ""{1}""
+  }},
+  ""headline"": ""{2}"",
+  ""image"": [ {3} ],
+  ""datePublished"": ""{4:O}"",
+  ""dateModified"": ""{5:O}"",
+  ""author"": {{
+    ""@type"": ""Person"",
+    ""name"": ""{6}""
+  }},
+  ""publisher"": {{
+    ""@type"": ""Organization"",
+    ""name"": ""{7}"",
+    ""logo"": {{
+      ""@type"": ""ImageObject"",
+      ""url"": ""{8}""
+    }}
+  }},
+  ""description"": ""{9}"",
+  ""articleBody"": """"
+}}
+", 
+          schema.PageType, schema.PageUrl, schema.Title, StringHlp.Join(", ", @"""{0}""", schema.ImageUrls),
+          schema.PublishedTime.ToLocalTime(), schema.ModifiedTime.ToLocalTime(),
+          schema.Author, schema.Organization, schema.LogoUrl, schema.Description
+        ))
+      );
     }
 
     public static HElement GoogleAnalytics()
@@ -256,7 +361,9 @@ namespace Commune.Html
         if (styles == null || styles.Length == 0)
           continue;
 
-        css.AppendLine(string.Format("@media {0} {{", media.Name));
+        string mediaPseudo = string.Format(media.Name, cssClassName);
+
+        css.AppendLine(string.Format("@media {0} {{", mediaPseudo));
         foreach (HStyle style in styles)
         {
           AddStyleToCss(css, cssClassName, style); 

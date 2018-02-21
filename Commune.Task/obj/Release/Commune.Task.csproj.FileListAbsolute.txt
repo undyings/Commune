@@ -1,0 +1,18 @@
+C:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Task\obj\Release\Commune.Task.csprojResolveAssemblyReference.cache
+C:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Task\bin\Release\Commune.Task.dll
+C:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Task\bin\Release\Commune.Task.pdb
+C:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Task\bin\Release\Commune.Basis.dll
+C:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Task\bin\Release\Commune.Diagnostics.dll
+C:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Task\bin\Release\Commune.Basis.pdb
+C:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Task\bin\Release\Commune.Diagnostics.pdb
+C:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Task\obj\Release\Commune.Task.dll
+C:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Task\obj\Release\Commune.Task.pdb
+D:\Projects\Commune\Commune.Task\bin\Release\Commune.Task.dll
+D:\Projects\Commune\Commune.Task\bin\Release\Commune.Task.pdb
+D:\Projects\Commune\Commune.Task\bin\Release\Commune.Basis.dll
+D:\Projects\Commune\Commune.Task\bin\Release\Commune.Diagnostics.dll
+D:\Projects\Commune\Commune.Task\bin\Release\Commune.Basis.pdb
+D:\Projects\Commune\Commune.Task\bin\Release\Commune.Diagnostics.pdb
+D:\Projects\Commune\Commune.Task\obj\Release\Commune.Task.csprojResolveAssemblyReference.cache
+D:\Projects\Commune\Commune.Task\obj\Release\Commune.Task.dll
+D:\Projects\Commune\Commune.Task\obj\Release\Commune.Task.pdb

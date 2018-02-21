@@ -22,6 +22,17 @@ namespace Commune.Html
       return data.ToString();
     }
 
+    public static bool GetBool(this JsonData json, string dataName)
+    {
+      string rawData = json.GetText(dataName);
+      return rawData?.ToLower() == "true";
+    }
+
+    public static int? GetInt(this JsonData json, string dataName)
+    {
+      return ConvertHlp.ToInt(json.GetData(dataName));
+    }
+
     public static T Media<T>(this T control, string queryWithBrackets, params HStyle[] styles)
       where T : IEditExtension
     {
@@ -118,12 +129,14 @@ namespace Commune.Html
 
   public class WebOperation
   {
+    public string Status = "";
     public string Message = "";
     public bool Completed = false;
     public string ReturnUrl = "";
 
     public void Reset()
     {
+      Status = "";
       Message = "";
       Completed = false;
       ReturnUrl = "";
@@ -139,5 +152,14 @@ namespace Commune.Html
     public WebOperation()
     {
     }
+  }
+
+  public class DialogIcon
+  {
+    public const string Info = "Info";
+    public const string Warning = "Warning";
+    public const string Question = "Question";
+    public const string Error = "Error";
+    public const string Success = "Success";
   }
 }

@@ -47,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataBox\BoxTypes.cs" />
-    <Compile Include="DataBox\DataBoxHlp.cs" />
     <Compile Include="DataBox\DataBox.cs" />
     <Compile Include="DataBox\DataCondition.cs" />
     <Compile Include="DataBox\KinBox.cs" />

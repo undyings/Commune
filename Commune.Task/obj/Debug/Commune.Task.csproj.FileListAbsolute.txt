@@ -1,0 +1,9 @@
+c:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Task\bin\Debug\Commune.Task.dll
+c:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Task\bin\Debug\Commune.Task.pdb
+c:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Task\bin\Debug\Commune.Basis.dll
+c:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Task\bin\Debug\Commune.Diagnostics.dll
+c:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Task\bin\Debug\Commune.Basis.pdb
+c:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Task\bin\Debug\Commune.Diagnostics.pdb
+c:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Task\obj\Debug\Commune.Task.csprojResolveAssemblyReference.cache
+c:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Task\obj\Debug\Commune.Task.dll
+c:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Task\obj\Debug\Commune.Task.pdb

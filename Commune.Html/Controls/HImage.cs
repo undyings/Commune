@@ -27,6 +27,8 @@ namespace Commune.Html
       foreach (HStyle pseudo in pseudoClasses)
         HtmlHlp.AddStyleToCss(css, cssClassName, pseudo);
 
+      HtmlHlp.AddMediaToCss(css, cssClassName, MediaExtensions);
+
       return h.Img(HtmlHlp.ContentForHElement(this, cssClassName, h.src(url))
       );
     }

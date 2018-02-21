@@ -7,20 +7,20 @@ namespace Commune.Data
 {
   public static class LightObjectExtension
   {
-    public static TField Get<TField>(this LightObject obj, FieldBlank<TField> property)
+    public static TField Get<TField>(this LightHead obj, FieldBlank<TField> property)
     {
       if (obj == null)
         return default(TField);
 
-      return property.Get(obj.Box.ObjectById.AnyRow(obj.Id));
+      return property.Get(obj.headBox.ObjectById.AnyRow(obj.Id));
     }
 
-    public static TField Get<TField>(this LightObject obj, XmlUniqueProperty<TField> property)
+    public static TField Get<TField>(this LightHead obj, XmlUniqueProperty<TField> property)
     {
       if (obj == null)
         return default(TField);
 
-      return property.Get(obj.Box, obj.Id);
+      return property.Get(obj.headBox, obj.Id);
     }
 
     public static TField Get<TField>(this LightObject obj,

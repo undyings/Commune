@@ -225,7 +225,7 @@ namespace Commune.Html
       return CssAttribute(control, "background", color);
     }
 
-    public static T Background<T>(this T control, string color,
+    public static T Background<T>(this T control,
       string imagePath, string repeat, string position) where T : IEditExtension
     {
       if (!StringHlp.IsEmpty(imagePath))
@@ -233,8 +233,13 @@ namespace Commune.Html
       if (!StringHlp.IsEmpty(repeat))
         CssAttribute(control, "background-repeat", repeat);
       if (!StringHlp.IsEmpty(position))
-        CssAttribute(control, "backround-position", position);
-      return Background(control, color);
+        CssAttribute(control, "background-position", position);
+      return control;
+    }
+
+    public static T BackgroundImage<T>(this T control, string imagePath) where T : IEditExtension
+    {
+      return CssAttribute(control, "background-image", string.Format("url({0})", imagePath));
     }
 
     public static T Overflow<T>(this T control, string overflow) where T : IEditExtension
@@ -345,6 +350,11 @@ namespace Commune.Html
       return control.HeightLimit(heightPx, heightPx);
     }
 
+    public static T Position<T>(this T control, string position) where T : IEditExtension
+    {
+      return control.CssAttribute("position", position);
+    }
+
     public static T PositionAbsolute<T>(this T control) where T : IEditExtension
     {
       return control.CssAttribute("position", "absolute");
@@ -416,6 +426,24 @@ namespace Commune.Html
       return CssAttribute(control, "cursor", cursor);
     }
 
+    public static T CursorPointer<T>(this T control) where T : IEditExtension
+    {
+      return Cursor(control, "pointer");
+    }
+
+    public static T CursorDefault<T>(this T control) where T : IEditExtension
+    {
+      return Cursor(control, "default");
+    }
+
+    public static T UserSelect<T>(this T control, string value) where T : IEditExtension
+    {
+      CssAttribute(control, "-moz-user-select", value);
+      CssAttribute(control, "-webkit-user-select", value);
+      CssAttribute(control, "-ms-user-select", value);
+      return CssAttribute(control, "user-select", value);
+    }
+
     public static T BoxSizing<T>(this T control, string boxSizing) where T : IEditExtension
     {
       return CssAttribute(control, "box-sizing", boxSizing);
@@ -451,9 +479,19 @@ namespace Commune.Html
       return CssAttribute(control, "font-family", string.Format("'{0}'", fontFamily));
     }
 
+    public static T LetterSpacing<T>(this T control, string spacing) where T : IEditExtension
+    {
+      return CssAttribute(control, "letter-spacing", spacing);
+    }
+
     public static T TextDecoration<T>(this T control, string decoration) where T : IEditExtension
     {
       return CssAttribute(control, "text-decoration", decoration);
+    }
+
+    public static T BoxShadow<T>(this T control, string shadow) where T : IEditExtension
+    {
+      return CssAttribute(control, "box-shadow", shadow);
     }
 
     public static T TextShadow<T>(this T control, string shadow) where T : IEditExtension
@@ -489,6 +527,7 @@ namespace Commune.Html
     public static T Transform<T>(this T control, string transform) where T : IEditExtension
     {
       CssAttribute(control, "-webkit-transform", transform);
+      CssAttribute(control, "-moz-transform", transform);
       CssAttribute(control, "-ms-transform", transform);
       return CssAttribute(control, "transform", transform);
     }
@@ -513,9 +552,19 @@ namespace Commune.Html
       return CssAttribute(control, "content", string.Format("'{0}'", content));
     }
 
+    public static T ContentIcon<T>(this T pseudo, int width, int height) where T : IEditExtension
+    {
+      return pseudo.Content("").InlineBlock().Size(width, height);
+    }
+
     public static T Left<T>(this T control, string left) where T : IEditExtension
     {
       return CssAttribute(control, "left", left);
+    }
+
+    public static T Left<T>(this T control, int left) where T : IEditExtension
+    {
+      return Left(control, string.Format("{0}px", left));
     }
 
     public static T Right<T>(this T control, string right) where T : IEditExtension
@@ -523,14 +572,29 @@ namespace Commune.Html
       return CssAttribute(control, "right", right);
     }
 
+    public static T Right<T>(this T control, int right) where T : IEditExtension
+    {
+      return Right(control, string.Format("{0}px", right));
+    }
+
     public static T Top<T>(this T control, string top) where T : IEditExtension
     {
       return CssAttribute(control, "top", top);
     }
 
+    public static T Top<T>(this T control, int top) where T : IEditExtension
+    {
+      return Top(control, string.Format("{0}px", top));
+    }
+
     public static T Bottom<T>(this T control, string bottom) where T : IEditExtension
     {
       return CssAttribute(control, "bottom", bottom);
+    }
+
+    public static T Bottom<T>(this T control, int bottom) where T : IEditExtension
+    {
+      return Bottom(control, string.Format("{0}px", bottom));
     }
 
     public static T Float<T>(this T control, string floats) where T : IEditExtension
@@ -556,6 +620,16 @@ namespace Commune.Html
     public static T MediaBlock<T>(this T control, bool? isLeft = null) where T : IEditExtension
     {
       return control.Block().Width("100%").BoxSizing().Align(isLeft);
+    }
+
+    public static T CenterBlock<T>(this T control) where T : IEditExtension
+    {
+      return control.PositionAbsolute().Top("50%").Left("50%").Transform("translate(-50%, -50%)");
+    }
+
+    public static T ZIndex<T>(this T control, int zindex) where T : IEditExtension
+    {
+      return CssAttribute(control, "z-index", zindex);
     }
   }
 }

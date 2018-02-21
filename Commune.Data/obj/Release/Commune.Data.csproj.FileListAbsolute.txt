@@ -16,3 +16,12 @@ C:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Data
 C:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Data\bin\Release\Commune.Data.pdb
 C:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Data\obj\Release\Commune.Data.dll
 C:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Data\obj\Release\Commune.Data.pdb
+D:\Projects\Commune\Commune.Data\bin\Release\Commune.Data.dll
+D:\Projects\Commune\Commune.Data\bin\Release\Commune.Data.pdb
+D:\Projects\Commune\Commune.Data\bin\Release\Commune.Basis.dll
+D:\Projects\Commune\Commune.Data\bin\Release\Commune.Diagnostics.dll
+D:\Projects\Commune\Commune.Data\bin\Release\Commune.Basis.pdb
+D:\Projects\Commune\Commune.Data\bin\Release\Commune.Diagnostics.pdb
+D:\Projects\Commune\Commune.Data\obj\Release\Commune.Data.csprojResolveAssemblyReference.cache
+D:\Projects\Commune\Commune.Data\obj\Release\Commune.Data.dll
+D:\Projects\Commune\Commune.Data\obj\Release\Commune.Data.pdb

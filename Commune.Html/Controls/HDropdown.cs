@@ -64,7 +64,8 @@ namespace Commune.Html
         HtmlHlp.AddClassToCss(css, separatorCssName, separatorStyle.CssExtensions);
 
       List<object> content = new List<object>(listControls.Length + 1);
-      content.Add(h.@class(dropListCssName));
+      if (listControls.Length != 0)
+        content.Add(h.@class(dropListCssName));
       int index = 0;
       foreach (IHtmlControl child in listControls)
       {

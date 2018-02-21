@@ -23,12 +23,14 @@ namespace Commune.Html
     public HElement ToHtml(string cssClassName, StringBuilder css)
     {
       DefaultExtensionContainer defaults = new DefaultExtensionContainer(this);
-      defaults.Display("inline-block");
+      defaults.InlineBlock();
 
       HtmlHlp.AddClassToCss(css, cssClassName, CssExtensions);
 
       foreach (HStyle pseudo in pseudoClasses)
         HtmlHlp.AddStyleToCss(css, cssClassName, pseudo);
+
+      HtmlHlp.AddMediaToCss(css, cssClassName, MediaExtensions);
 
       return h.Div(HtmlHlp.ContentForHElement(this, cssClassName, caption));
     }

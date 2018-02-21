@@ -28,7 +28,7 @@ namespace Commune.Html
       HtmlHlp.AddClassToCss(css, cssClassName, CssExtensions);
 
       return h.TextArea(HtmlHlp.ContentForHElement(this, cssClassName,
-        h.data("name", Name), text)
+        h.data("name", Name), h.data("id", Name), text)
       );
     }
   }
