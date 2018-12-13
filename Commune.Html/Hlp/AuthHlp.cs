@@ -29,6 +29,11 @@ namespace Commune.Html
 
     public static void SetUserFromCookie(this HttpContext context)
     {
+      SetUserFromCookie(context, false);
+    }
+
+    public static void SetUserFromCookie(this HttpContext context, bool logException)
+    {
       HttpCookie cookie = context.Request.Cookies[FormsAuthentication.FormsCookieName];
       if (cookie != null)
       {
@@ -44,9 +49,13 @@ namespace Commune.Html
 
           SetUser(context, authTicket.Name, roles);
         }
-        catch
+        catch (Exception ex)
         {
-          //Logger.WriteException(ex);
+          if (logException)
+          {
+            Logger.WriteException(ex);
+            Logger.AddMessage("Cookie: {0}", cookie?.Value);
+          }
         }
       }
     }

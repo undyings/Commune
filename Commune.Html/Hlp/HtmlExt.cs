@@ -40,6 +40,12 @@ namespace Commune.Html
       return control;
     }
 
+    public static T Media<T>(this T control, int maxWidth, params HStyle[] styles)
+      where T : IEditExtension
+    {
+      return control.Media(string.Format("(max-width: {0}px)", maxWidth), styles);
+    }
+
     public static T Hide<T>(this T control, bool hide) where T : IEditExtension
     {
       control.WithExtension(new ExtensionAttribute("hide", hide));

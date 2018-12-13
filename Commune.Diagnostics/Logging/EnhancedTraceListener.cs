@@ -7,7 +7,7 @@ namespace Commune.Diagnostics
 {
 	public class EnhancedTraceListener : TraceListener
 	{
-		private Log log;
+		readonly Log log;
 		public EnhancedTraceListener(Log log)	
 		{
 			this.log = log;

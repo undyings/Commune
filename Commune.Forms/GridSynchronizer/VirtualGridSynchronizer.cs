@@ -16,7 +16,7 @@ namespace Commune.Forms
     public Getter<object, object> RowKeyGetter;
     public Getter<object> FilterRowGetter;
     private IGridColumn defaultFilterColumn;
-    private int filterSeparatorHeight;
+    private int filterSeparatorHeight = 0;
     private IGridColumn[] tempColumns = new IGridColumn[0];
     private IList tempRows = new object[0];
     public string CaptionForEmptyFilter;

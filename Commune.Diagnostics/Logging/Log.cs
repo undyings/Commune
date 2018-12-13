@@ -21,7 +21,7 @@ namespace Commune.Diagnostics
     public readonly ListMessages ErrorHistory = new ListMessages(MaxErrorCapacity, ErrorDelta);
     TraceMessage lastErrorMessage;
 
-    FileLog _FileLog;
+    readonly FileLog _FileLog;
 
     //	private bool _IsAutoShownOnError = false;
     private DateTime lastErrorTime = DateTime.Now;
@@ -43,11 +43,11 @@ namespace Commune.Diagnostics
       }
     }
 
-    public Log()
-      :
-      this(Commune.Diagnostics.FileLog.DefaultLogFilePath, Commune.Diagnostics.FileLog.DefaultMaxLogSize)
-    {
-    }
+    //public Log()
+    //  :
+    //  this(Commune.Diagnostics.FileLog.DefaultLogFilePath, Commune.Diagnostics.FileLog.DefaultMaxLogSize)
+    //{
+    //}
 
     public IFileLog FileLog
     {

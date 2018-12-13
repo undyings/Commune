@@ -4,12 +4,12 @@ using System.Text;
 
 namespace Commune.Task
 {
-  interface IForcePullThread
+  public interface IForcePullThread
   {
     void ForceTask(Task task);
   }
 
-  interface IForceTask
+  public interface IForceTask
   {
     void Initialize(IForcePullThread pullThread);
   }

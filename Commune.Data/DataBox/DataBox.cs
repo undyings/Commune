@@ -129,12 +129,18 @@ namespace Commune.Data
       objectBox.ObjectById.RemoveRows(objectId);
     }
 
+    [Obsolete("Используйте DeleteRecursiveParentObject")]
     public static void DeleteParentObject(IDataLayer dbConnection, int objectId)
+    {
+      DeleteRecursiveParentObject(dbConnection, objectId);
+    }
+
+    public static void DeleteRecursiveParentObject(IDataLayer dbConnection, int objectId)
     {
       string tablePrefix;
       string database = DataBox.GetDatabase(dbConnection, out tablePrefix);
 
-      DeleteChildObject(dbConnection, database, tablePrefix, objectId);
+      DeleteRecursiveChildObject(dbConnection, database, tablePrefix, objectId);
 
       dbConnection.GetScalar(database,
         string.Format("Delete From {0}_link Where child_id = {1}objectId",
@@ -143,7 +149,7 @@ namespace Commune.Data
       );
     }
 
-    static void DeleteChildObject(IDataLayer dbConnection, string database, string tablePrefix, int objectId)
+    static void DeleteRecursiveChildObject(IDataLayer dbConnection, string database, string tablePrefix, int objectId)
     {
       DataTable table = dbConnection.GetTable(database, string.Format(
         "Select child_id From {0}_link Where parent_id = {1}objectId", tablePrefix, dbConnection.DbParamPrefix),
@@ -154,7 +160,7 @@ namespace Commune.Data
       {
         int? childId = ConvertHlp.ToInt(row[0]);
         if (childId != null)
-          DeleteChildObject(dbConnection, database, tablePrefix, childId.Value);
+          DeleteRecursiveChildObject(dbConnection, database, tablePrefix, childId.Value);
       }
 
       if (table.Rows.Count > 0)

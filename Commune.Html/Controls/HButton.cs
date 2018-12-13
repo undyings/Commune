@@ -24,8 +24,6 @@ namespace Commune.Html
       this.pseudoClasses = pseudoClasses;
     }
 
-    static readonly HBuilder h = null;
-
     public HElement ToHtml(string cssClassName, StringBuilder css)
     {
       {

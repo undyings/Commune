@@ -52,8 +52,6 @@
     <Compile Include="Thread\TaskQueue.cs" />
     <Compile Include="Thread\ThreadLabel.cs" />
     <Compile Include="Thread\UIPullThread.cs" />
-    <Compile Include="UI\UIOperation.cs" />
-    <Compile Include="UI\UITaskPull.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Commune.Basis\Commune.Basis.csproj">

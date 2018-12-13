@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
-using Commune.Diagnostics;
+using Commune.Basis;
 
-namespace Commune.Basis
+namespace Commune.Forms
 {
   public class AsyncAction<TResult, TError> : IDisposable
   {

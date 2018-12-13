@@ -6,6 +6,14 @@ using System.Web;
 
 namespace Commune.Diagnostics
 {
+  public interface IFileLog
+  {
+    int MaxLogLength { get; set; }
+    TimeSpan ScanPeriod { get; set; }
+    void AppendAllLogs();
+    string MainLogFileName { get; }
+  }
+
   public class FileLog : IFileLog, IDisposable
   {
     public FileLog(string baseLogFilePath, long maxLogSize)
@@ -14,22 +22,22 @@ namespace Commune.Diagnostics
       this.maxLogSize = maxLogSize;
       writer = CaptureLogFile(baseLogFilePath, out logFilePath);
     }
-    string baseLogFilePath;
-    string logFilePath;
+    readonly string baseLogFilePath;
+    readonly string logFilePath;
     long maxLogSize;
     StreamWriter writer;
-    object writer_locker = new object();
+    readonly object writer_locker = new object();
 
-    public static string DefaultLogFilePath
-    {
-      get
-      {
-        if (HttpContext.Current != null)
-          return HttpContext.Current.Server.MapPath("");
-        return Path.ChangeExtension(System.Reflection.Assembly.GetEntryAssembly().Location, ".log");
-      }
-    }
-    public static readonly long DefaultMaxLogSize = 2 * 1024 * 1024;
+    //public static string DefaultLogFilePath
+    //{
+    //  get
+    //  {
+    //    if (HttpContext.Current != null)
+    //      return HttpContext.Current.Server.MapPath("");
+    //    return Path.ChangeExtension(System.Reflection.Assembly.GetEntryAssembly().Location, ".log");
+    //  }
+    //}
+    //public static readonly long DefaultMaxLogSize = 2 * 1024 * 1024;
 
     static StreamWriter CaptureLogFile(string baseLogFilePath, out string logFilePath)
     {

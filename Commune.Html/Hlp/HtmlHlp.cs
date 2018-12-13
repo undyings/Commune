@@ -13,6 +13,58 @@ namespace Commune.Html
   {
     static readonly HBuilder h = null;
 
+    public static HSpan VAligner()
+    {
+      return new HSpan("").InlineBlock().Height("100%").VAlign(null);
+    }
+
+    public static IHtmlControl PagingKeyboard()
+    {
+      return new HElementControl(h.Script(h.Raw(@"
+window.addEventListener('keydown', function(e) 
+{
+ if (e.keyCode == 37) { var b = $('.prev'); if (b.length > 0) b[0].click(); }
+ else if (e.keyCode == 39) { var b = $('.next'); if (b.length > 0) b[0].click(); }
+});
+")), "pagingKeyboard_script");
+    }
+
+    public static IHtmlControl UpbuttonScript(int hideScrollTop, int staticScrollBottom)
+    {
+      string scriptPattern = @"
+if (window.upbuttonLaunch != true)
+{
+  window.upbuttonLaunch = true;
+  window.onscroll = function() {
+    var scrolled = window.pageYOffset || document.documentElement.scrollTop;
+    var clientHeight = document.documentElement.clientHeight;
+  
+    var scrollHeight = Math.max(
+      document.body.scrollHeight, document.documentElement.scrollHeight,
+      document.body.offsetHeight, document.documentElement.offsetHeight,
+      document.body.clientHeight, document.documentElement.clientHeight
+    );
+    if (scrolled < <<scrollTop>>) {
+      $('.upbutton')[0].style.display = 'none';
+    }
+    else {
+      $('.upbutton')[0].style.display = 'inline-block';
+      if (scrolled + clientHeight < scrollHeight - <<scrollBottom>>)
+        $('.upbutton')[0].style.position = 'fixed';
+      else
+        $('.upbutton')[0].style.position = 'static';
+    }
+  }
+}
+";
+
+      return new HElementControl(h.Script(h.Raw(
+        scriptPattern.Replace("<<scrollTop>>", hideScrollTop.ToString())
+          .Replace("<<scrollBottom>>", staticScrollBottom.ToString())
+        )), "upbutton_script"
+      );
+    }
+
     public static HtmlResult FirstHtmlResult(HElement page, object state, TimeSpan? refreshPeriod)
     {
       return new HtmlResult
@@ -33,11 +85,22 @@ namespace Commune.Html
     public static string ToHtmlText(HElement element)
     {
       StringBuilder builder = new StringBuilder();
-      ToHtmlText(builder, element);
+      builder.Append("<!DOCTYPE html>");
+      builder.Append("<html>");
+      ToHtmlText(builder, (HElement)element.Nodes[0], false);
+      ToHtmlText(builder, (HElement)element.Nodes[1], true);
+      builder.Append("</html>");
       return builder.ToString();
     }
 
-    static void ToHtmlText(StringBuilder builder, HElement element)
+    //public static string ToHtmlText(HElement element)
+    //{
+    //  StringBuilder builder = new StringBuilder();
+    //  ToHtmlText(builder, element);
+    //  return builder.ToString();
+    //}
+
+    static void ToHtmlText(StringBuilder builder, HElement element, bool isBody)
     {
       string elementType = element.Name.LocalName?.ToString();
       builder.Append("<");
@@ -59,7 +122,15 @@ namespace Commune.Html
           foreach (var node in element.Nodes)
           {
             if (node is HElement)
-              ToHtmlText(builder, (HElement)node);
+            {
+              HElement elem = (HElement)node;
+              if (isBody && elem.Name.LocalName == "script")
+              {
+                continue;
+                //Logger.AddMessage("Script: {0}", elem.ToHtmlText());
+              }
+              ToHtmlText(builder, elem, isBody);
+            }
             else if (node is HText)
               builder.Append(HttpUtility.HtmlEncode(((HText)node).Text));
             else
@@ -168,6 +239,7 @@ namespace Commune.Html
       List<string> propList = new List<string>();
       propList.Add(string.Format("height: '{0}'", height));
       propList.Add(string.Format("extraPlugins: 'justify,colorbutton,indentblock,textselection'"));
+      propList.Add("allowedContent: true");
       if (isRu)
         propList.Add("language: 'ru'");
       propList.AddRange(editorProps);
@@ -318,6 +390,21 @@ namespace Commune.Html
     //{
     //  AddPseudoClassToCss(css, "hover", cssClassName, control);
     //}
+
+    public static void AddKeyFramesToCss(StringBuilder css, string framesName, params HStyle[] frames)
+    {
+      css.AppendLine(string.Format("@keyframes {0} {{", framesName));
+      foreach (HStyle frame in frames)
+      {
+        css.Append(frame.Name);
+        css.Append(" {");
+        foreach (CssExtensionAttribute extension in frame.CssExtensions)
+          css.AppendFormat(" {0}:{1};", extension.Name, extension.Value);
+        css.Append("}");
+        css.Append(Environment.NewLine);
+      }
+      css.AppendLine("}");
+    }
 
     public static void AddClassToCss(StringBuilder css, string className, 
       IEnumerable<CssExtensionAttribute> cssExtensions)

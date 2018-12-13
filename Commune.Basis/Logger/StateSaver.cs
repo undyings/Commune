@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
-using System.Windows.Forms;
+using System.Timers;
+//using System.Windows.Forms;
 using System.Xml;
 using System.IO.Compression;
 
@@ -10,9 +11,9 @@ namespace Commune.Basis
 {
   public class StateSaver : IDisposable
   {
-    public static StateSaver Current =
-      new StateSaver(ApplicationHlp.MapPath(@"State\current.xml"),
-      TimeSpan.FromMinutes(10), TimeSpan.FromMinutes(47), 150);
+    //public static StateSaver Current =
+    //  new StateSaver(ApplicationHlp.MapPath(@"State\current.xml"),
+    //  TimeSpan.FromMinutes(10), TimeSpan.FromMinutes(47), 150);
 
     public StateSaver(string path, TimeSpan interval)
       : this(path, interval, TimeSpan.Zero, 0)
@@ -26,7 +27,7 @@ namespace Commune.Basis
       this.BackupInterval = backupInterval;
       this.MaxStateFiles = maxStateFiles;
 
-      timer.Tick += new EventHandler(timer_Tick);
+      timer.Elapsed += new ElapsedEventHandler(timer_Tick);
     }
 
     string path;

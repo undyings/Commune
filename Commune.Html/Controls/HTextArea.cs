@@ -25,6 +25,9 @@ namespace Commune.Html
 
     public HElement ToHtml(string cssClassName, StringBuilder css)
     {
+      DefaultExtensionContainer defaults = new DefaultExtensionContainer(this);
+      defaults.CssAttribute("resize", "none");
+
       HtmlHlp.AddClassToCss(css, cssClassName, CssExtensions);
 
       return h.TextArea(HtmlHlp.ContentForHElement(this, cssClassName,

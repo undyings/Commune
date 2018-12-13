@@ -12,7 +12,7 @@ namespace Commune.Html
     readonly string fileUploadJsPath;
     readonly string caption;
     readonly object objectId;
-    readonly string[] gauges;
+    readonly HAttribute[] attributes;
 
     /// <summary>
     /// Для использования подключите fileuploader.css и fileuploader.js.
@@ -22,13 +22,13 @@ namespace Commune.Html
     /// </summary>
     /// <param name="fileUploadJsPath">Например, fileupload.js</param>
     /// <param name="objectId">Идентификатор объекта, к которому относятся загружаемые файлы</param>
-    public HFileUploader(string fileUploadJsPath, string caption, object objectId, params string[] gauges) :
+    public HFileUploader(string fileUploadJsPath, string caption, object objectId, params HAttribute[] attributes) :
       base("HFileUploader", "")
     {
       this.fileUploadJsPath = fileUploadJsPath;
       this.caption = caption;
       this.objectId = objectId;
-      this.gauges = gauges;
+      this.attributes = attributes;
     }
 
     static readonly HBuilder h = null;
@@ -42,22 +42,16 @@ namespace Commune.Html
         builder.AppendFormat(", action: '{0}'", fileUploadJsPath);
         builder.Append(", encoding: 'multipart'");
         builder.AppendFormat(", uploadButtonText: '{0}'", caption);
-        builder.AppendFormat(", params: {{objectId: '{0}'}}", objectId);
-        foreach (string gauge in gauges)
+        builder.Append(", params: {");
+        builder.AppendFormat("objectId: '{0}'", objectId);
+        foreach (HAttribute attr in attributes)
         {
-          builder.Append(", ");
-          builder.Append(gauge);
+          builder.AppendFormat(", {0}: '{1}'", attr.Name, attr.Value);
         }
-        builder.Append("})");
+        builder.Append("}})");
 
         content.Add(h.Attribute("js-init", builder.ToString())
         );
-
-        //content.Add(h.Attribute("js-init", string.Format(
-        //  "new qq.FileUploader({{element: this, action: '{0}', encoding: 'multipart', uploadButtonText: '{1}', params: {{objectId: '{2}'}} }})",
-        //  fileUploadJsPath, caption, objectId
-        //  ))
-        //);
       }
       foreach (TagExtensionAttribute extension in TagExtensions)
         content.Add(new HAttribute(extension.Name, extension.Value));

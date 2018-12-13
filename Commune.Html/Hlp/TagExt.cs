@@ -69,5 +69,38 @@ namespace Commune.Html
     {
       return TagAttribute(control, "rel", "nofollow");
     }
+
+    public static T PagingTouch<T>(this T control) where T : IEditExtension
+    {
+      return PagingTouch(control, "prev", "next");
+    }
+
+    public static T PagingTouch<T>(this T control, 
+      string prevButtonClassName, string nextButtonClassName) where T : IEditExtension
+    {
+      return control
+        .TagAttribute("ontouchstart", "window.touchStart = event.touches[0];")
+        .TagAttribute("ontouchend", "window.touchStart = null;")
+        .TagAttribute("ontouchmove", string.Format(@"
+if (window.touchStart == null) return;
+var p1 = window.touchStart;
+var p2 = event.changedTouches[0];
+var x = p2.screenX - p1.screenX;
+var y = Math.abs(p2.screenY - p1.screenY);
+if (x > 30 && y < x) {{ var b = $('.{0}'); if (b.length > 0) b[0].click(); window.touchStart = null; return; }}
+if (x < -30 && y < -x ) {{ var b = $('.{1}'); if (b.length > 0) b[0].click(); window.touchStart = null; return; }}
+", prevButtonClassName, nextButtonClassName));
+    }
+
+    public static T PagingClick<T>(this T control) where T : IEditExtension
+    {
+      return control.OnClick(@"
+var width = document.documentElement.clientWidth;
+var x = e.clientX;
+if (x > width / 2) { var b = $('.next'); if (b.length > 0) b[0].click(); }
+else { var b = $('.prev'); if (b.length > 0) b[0].click(); }
+e.stopPropagation();
+");
+    }
   }
 }

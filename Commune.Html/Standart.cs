@@ -11,7 +11,17 @@ namespace Commune.Html
 {
   public static class std
   {
-    //public static IHtmlControl 
+    public static IHtmlControl Upbutton(string imageUrl)
+    {
+      return new HLink("#",
+          new HImage(imageUrl)
+      ).ExtraClassNames("upbutton").Title("Наверх")
+        .BoxSizing().Size(46, 46).Align(null).PaddingTop(13)
+        .Background("#fff").BorderRadius("50%")
+        .BoxShadow("0 5px 10px rgba(0,0,0,.4), 0 -1px 1px rgba(0,0,0,.2)")
+        .ZIndex(500).Bottom(10).Right(10)
+        .Media(480, new HStyle().Size(36, 36).Bottom(3).Right(3).PaddingTop(8));
+    }
 
     public static HClickDropdown ComboButton(HBefore beforeIcon, string caption, 
       bool isLeftDropListAlignment, params IHtmlControl[] listControls)

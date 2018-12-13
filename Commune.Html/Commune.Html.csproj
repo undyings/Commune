@@ -68,7 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuthHlp.cs" />
+    <Compile Include="Hlp\AuthHlp.cs" />
     <Compile Include="Controls\HAnchor.cs" />
     <Compile Include="Controls\HButton.cs" />
     <Compile Include="Controls\HCheckButton.cs" />
@@ -97,9 +97,9 @@
     <Compile Include="Controls\HTextArea.cs" />
     <Compile Include="Controls\HTextView.cs" />
     <Compile Include="Controls\HTextEdit.cs" />
-    <Compile Include="Enum.cs" />
+    <Compile Include="Hlp\Enum.cs" />
     <Compile Include="Controls\HXPanel.cs" />
-    <Compile Include="CssExt.cs" />
+    <Compile Include="Hlp\CssExt.cs" />
     <Compile Include="Grid\HGrid.cs" />
     <Compile Include="Grid\HGridStyle.cs" />
     <Compile Include="Grid\HRowStyle.cs" />
@@ -107,15 +107,16 @@
     <Compile Include="Grid\HTableGrid.cs" />
     <Compile Include="Grid\HTableGrid2.cs" />
     <Compile Include="Grid\IHGrid.cs" />
-    <Compile Include="HtmlHlp.cs" />
-    <Compile Include="HtmlExt.cs" />
+    <Compile Include="Hlp\HtmlHlp.cs" />
+    <Compile Include="Hlp\HtmlExt.cs" />
     <Compile Include="Controls\HPanel.cs" />
     <Compile Include="IHtmlControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pseudo.cs" />
     <Compile Include="SchemaOrg.cs" />
+    <Compile Include="Hlp\SliderHlp.cs" />
     <Compile Include="Standart.cs" />
-    <Compile Include="TagExt.cs" />
+    <Compile Include="Hlp\TagExt.cs" />
     <Compile Include="Wui\HBuilder2.cs" />
     <Compile Include="Wui\HEvent.cs" />
   </ItemGroup>

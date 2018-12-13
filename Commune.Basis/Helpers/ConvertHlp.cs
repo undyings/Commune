@@ -160,7 +160,7 @@ namespace Commune.Basis
           return null;
         return Convert.ToInt32(value);
       }
-      catch (Exception exc)
+      catch
       {
       }
       return null;

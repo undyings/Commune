@@ -68,7 +68,15 @@ namespace Commune.Data
 
   public class VirtualRowLink : IRowLink
   {
-    readonly Dictionary<string, object> fieldByName = new Dictionary<string, object>();
+    public readonly Dictionary<string, object> fieldByName = new Dictionary<string, object>();
+
+    //public string[] AllNames
+    //{
+    //  get
+    //  {
+    //    return _.ToArray(fieldByName.Keys);
+    //  }
+    //}
 
     object IRowLink.GetValue(string name)
     {

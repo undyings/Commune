@@ -4,7 +4,6 @@ using System.Collections;
 using System.Diagnostics;
 using System.Reflection;
 using System.Configuration;
-using System.Windows.Forms;
 using Commune.Diagnostics;
 
 namespace Commune.Basis
@@ -14,32 +13,49 @@ namespace Commune.Basis
   /// </summary>
   public class Logger
   {
-    static Log Current = new Log();
+    //static Log Current = new Log();
 
     private static EnhancedTraceListener _Listener = null;
-    
-    public static void EnableLogging()
+
+    //public static void EnableLogging()
+    //{
+    //  try
+    //  {
+    //    if (_Listener == null)
+    //      _Listener = new EnhancedTraceListener(Current);
+
+    //    //			    //cheated : обращение к переменной создаёт одиночку
+    //    //			    Logging.Log.Current.GetType();
+    //    //System.Windows.Forms.Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
+
+    //    AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
+    //  }
+    //  catch
+    //  {
+    //  }
+    //}
+
+    //public static void EnableLogging()
+    //{
+
+    //}
+
+    public static void EnableLogging(string logFilePath, int maxLogSizeInMegaBytes)
     {
       try
       {
-        if (_Listener == null)
-          _Listener = new EnhancedTraceListener(Current);
+        if (_Listener != null)
+          return;
 
-        //			    //cheated : обращение к переменной создаёт одиночку
-        //			    Logging.Log.Current.GetType();
-        System.Windows.Forms.Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
+        Log current = new Log(logFilePath, maxLogSizeInMegaBytes * 1024 * 1024);
+
+        _Listener = new EnhancedTraceListener(current);
 
         AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
       }
       catch
       {
       }
-    }
-
-    public static void EnableLogging(string logFilePath, int maxLogSizeInMegaBytes)
-    {
-      Current = new Log(logFilePath, maxLogSizeInMegaBytes * 1024 * 1024);
-      EnableLogging();
     }
 
     static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
@@ -176,13 +192,13 @@ namespace Commune.Basis
     {
       Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
     }
-    public static void MakeFileTraceListener()
-    {
-      Directory.CreateDirectory("Logs");
-      Trace.AutoFlush = true;
-      Trace.Listeners.Add(GetListener("Logs"));
-      Trace.AutoFlush = true;
-    }
+    //public static void MakeFileTraceListener()
+    //{
+    //  Directory.CreateDirectory("Logs");
+    //  Trace.AutoFlush = true;
+    //  Trace.Listeners.Add(GetListener("Logs"));
+    //  Trace.AutoFlush = true;
+    //}
     public static void MakeFileTraceListener(string dir, string name)
     {
       string path = Path.Combine(dir, "Logs");
@@ -191,11 +207,11 @@ namespace Commune.Basis
       Trace.Listeners.Add(GetListener(path, name));
     }
 
-    static TextWriterTraceListener GetListener(string dir)
-    {
-      string name = Path.GetFileNameWithoutExtension(Application.ExecutablePath);
-      return GetListener(dir, name);
-    }
+    //static TextWriterTraceListener GetListener(string dir)
+    //{
+    //  string name = Path.GetFileNameWithoutExtension(Application.ExecutablePath);
+    //  return GetListener(dir, name);
+    //}
 
 
     static TextWriterTraceListener GetListener(string dir, string name)

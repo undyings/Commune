@@ -10,6 +10,36 @@ namespace Commune.Html
 {
   public static class CssExt
   {
+    public static T AnimationName<T>(this T control, string name) where T : IEditExtension
+    {
+      return CssAttribute(control, "animation-name", name);
+    }
+
+    public static T AnimationDelay<T>(this T control, string delay) where T : IEditExtension
+    {
+      return CssAttribute(control, "animation-delay", delay);
+    }
+
+    public static T AnimationDuration<T>(this T control, string duration) where T : IEditExtension
+    {
+      return CssAttribute(control, "animation-duration", duration);
+    }
+
+    public static T AnimationIterationCount<T>(this T control, string iterationCount) where T : IEditExtension
+    {
+      return CssAttribute(control, "animation-iteration-count", iterationCount);
+    }
+
+    public static T AnimationTiming<T>(this T control, string timingFunction) where T : IEditExtension
+    {
+      return CssAttribute(control, "animation-timing-function", timingFunction);
+    }
+
+    public static T AnimationFillMode<T>(this T control, string fillMode) where T : IEditExtension
+    {
+      return CssAttribute(control, "animation-fill-mode", fillMode);
+    }
+
     public static T Margin<T>(this T control, string margin) where T : IEditExtension
     {
       return CssAttribute(control, "margin", margin);
@@ -242,6 +272,11 @@ namespace Commune.Html
       return CssAttribute(control, "background-image", string.Format("url({0})", imagePath));
     }
 
+    public static T BackgroundSize<T>(this T control, string size) where T : IEditExtension
+    {
+      return CssAttribute(control, "background-size", size);
+    }
+
     public static T Overflow<T>(this T control, string overflow) where T : IEditExtension
     {
       if (!StringHlp.IsEmpty(overflow))
@@ -283,6 +318,11 @@ namespace Commune.Html
       if (!StringHlp.IsEmpty(width))
         CssAttribute(control, "width", width);
       return control;
+    }
+
+    public static T WidthFull<T>(this T control) where T : IEditExtension
+    {
+      return Width(control, "100%");
     }
 
     public static T WidthLimit<T>(this T control, string minWidth, string maxWidth) where T : IEditExtension
@@ -363,6 +403,11 @@ namespace Commune.Html
     public static T PositionRelative<T>(this T control) where T : IEditExtension
     {
       return control.CssAttribute("position", "relative");
+    }
+
+    public static T PositionAbsoluteWithVAlign<T>(this T control) where T : IEditExtension
+    {
+      return control.PositionAbsolute().Top("50%").Transform("translateY(-50%)");
     }
 
     public static T Align<T>(this T control, bool? isLeft) where T : IEditExtension
@@ -555,6 +600,12 @@ namespace Commune.Html
     public static T ContentIcon<T>(this T pseudo, int width, int height) where T : IEditExtension
     {
       return pseudo.Content("").InlineBlock().Size(width, height);
+    }
+
+    public static T ContentIcon<T>(this T pseudo, int width, int height, string backgroundUrl) where T : IEditExtension
+    {
+      pseudo.BackgroundImage(backgroundUrl);
+      return pseudo.ContentIcon(width, height);
     }
 
     public static T Left<T>(this T control, string left) where T : IEditExtension

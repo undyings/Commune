@@ -4,7 +4,6 @@ using System.Text;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Xml;
-using System.Windows.Forms;
 using System.Diagnostics;
 
 namespace Commune.Basis
@@ -26,10 +25,10 @@ namespace Commune.Basis
       return Process.Start(info);
     }
 
-    public static string MapPath(string filename)
-    {
-      return Path.Combine(System.Windows.Forms.Application.StartupPath, filename);
-    }
+    //public static string MapPath(string filename)
+    //{
+    //  return Path.Combine(System.Windows.Forms.Application.StartupPath, filename);
+    //}
 
     public static string CheckAndCreateFolderPath(string root, params string[] folders)
     {
@@ -43,54 +42,55 @@ namespace Commune.Basis
       return path;
     }
 
-    public static ComponentInfo[] GetComponentsInfo()
-    {
-      List<ComponentInfo> components = new List<ComponentInfo>();
+    //public static ComponentInfo[] GetComponentsInfo()
+    //{
+    //  List<ComponentInfo> components = new List<ComponentInfo>();
 
-      string[] versionFiles = Directory.GetFiles(MapPath("."), "*.version");
-      foreach (string file in versionFiles)
-      {
-        Match m = Regex.Match(Path.GetFileName(file), @"^(?<progName>.*)\.version$");
-        ComponentInfo info = new ComponentInfo();
-        info.Name = m.Groups["progName"].Value;
-        info.Version = File.ReadAllText(file);
+    //  string[] versionFiles = Directory.GetFiles(MapPath("."), "*.version");
+    //  foreach (string file in versionFiles)
+    //  {
+    //    Match m = Regex.Match(Path.GetFileName(file), @"^(?<progName>.*)\.version$");
+    //    ComponentInfo info = new ComponentInfo();
+    //    info.Name = m.Groups["progName"].Value;
+    //    info.Version = File.ReadAllText(file);
 
-        string historyFile = ApplicationHlp.MapPath(info.Name + ".history.html");
-        if (File.Exists(historyFile))
-        {
-          info.History = File.ReadAllText(historyFile);
-          try
-          {
-            XmlDocument doc = new XmlDocument();
-            doc.LoadXml(info.History);
-            info.History = doc.InnerText;
-          }
-          catch (Exception exc)
-          {
-            //Это не ошибка, просто не Xml - формат
-            Logger.WriteException(exc);
-          }
-        }
-        else
-          info.History = string.Empty;
+    //    string historyFile = ApplicationHlp.MapPath(info.Name + ".history.html");
+    //    if (File.Exists(historyFile))
+    //    {
+    //      info.History = File.ReadAllText(historyFile);
+    //      try
+    //      {
+    //        XmlDocument doc = new XmlDocument();
+    //        doc.LoadXml(info.History);
+    //        info.History = doc.InnerText;
+    //      }
+    //      catch (Exception exc)
+    //      {
+    //        //Это не ошибка, просто не Xml - формат
+    //        Logger.WriteException(exc);
+    //      }
+    //    }
+    //    else
+    //      info.History = string.Empty;
 
-        components.Add(info);
-      }
-      return components.ToArray();
-    }
-    public static string[] GetVersions()
-    {
-      List<string> versions = new List<string>();
+    //    components.Add(info);
+    //  }
+    //  return components.ToArray();
+    //}
+    //public static string[] GetVersions()
+    //{
+    //  List<string> versions = new List<string>();
 
-      string[] versionFiles = Directory.GetFiles(MapPath("."), "*.version");
-      foreach (string file in versionFiles)
-      {
-        Match m = Regex.Match(Path.GetFileName(file), @"^(?<progName>.*)\.version$");
-        string version = File.ReadAllText(file);
-        versions.Add(version);
-      }
-      return versions.ToArray();
-    }
+    //  string[] versionFiles = Directory.GetFiles(MapPath("."), "*.version");
+    //  foreach (string file in versionFiles)
+    //  {
+    //    Match m = Regex.Match(Path.GetFileName(file), @"^(?<progName>.*)\.version$");
+    //    string version = File.ReadAllText(file);
+    //    versions.Add(version);
+    //  }
+    //  return versions.ToArray();
+    //}
+
     public struct ComponentInfo
     {
       public string Name;

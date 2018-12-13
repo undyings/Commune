@@ -7,3 +7,5 @@ D:\Projects\Commune\Commune.Forms\bin\Release\Commune.Diagnostics.pdb
 D:\Projects\Commune\Commune.Forms\obj\Release\Commune.Forms.csprojResolveAssemblyReference.cache
 D:\Projects\Commune\Commune.Forms\obj\Release\Commune.Forms.dll
 D:\Projects\Commune\Commune.Forms\obj\Release\Commune.Forms.pdb
+D:\Projects\Commune\Commune.Forms\bin\Release\Commune.Task.dll
+D:\Projects\Commune\Commune.Forms\bin\Release\Commune.Task.pdb

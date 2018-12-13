@@ -9,6 +9,7 @@ namespace Commune.Basis
   public class TuneContainer<T>
   {
     readonly Dictionary<string, T> tuneByName = new Dictionary<string, T>();
+    readonly Dictionary<string, string> settingByName = new Dictionary<string, string>();
 
     public TuneContainer()
     {
@@ -27,6 +28,21 @@ namespace Commune.Basis
       if (tuneName == null)
         return;
       tuneByName[tuneName] = value;
+    }
+
+    public string GetSetting(string settingName)
+    {
+      string setting;
+      if (settingByName.TryGetValue(settingName, out setting))
+        return setting;
+      return "";
+    }
+
+    public void WithSetting(string settingName, string value)
+    {
+      if (settingName == null)
+        return;
+      settingByName[settingName] = value;
     }
   }
 }
