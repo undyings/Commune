@@ -233,31 +233,31 @@ if (window.upbuttonLaunch != true)
       return h.Script(h.type("text/javascript"), string.Format(@"$(location).attr('href','{0}');", redirectUrl));
     }
 
-    public static IHtmlControl CKEditorCreate(string dataName, string text,
-      string height, bool isRu, params string[] editorProps)
-    {
-      List<string> propList = new List<string>();
-      propList.Add(string.Format("height: '{0}'", height));
-      propList.Add(string.Format("extraPlugins: 'justify,colorbutton,indentblock,textselection'"));
-      propList.Add("allowedContent: true");
-      if (isRu)
-        propList.Add("language: 'ru'");
-      propList.AddRange(editorProps);
+		public static IHtmlControl CKEditorCreate(string dataName, string text,
+			string height, bool isRu, params string[] editorProps)
+		{
+			List<string> propList = new List<string>();
+			propList.Add(string.Format("height: '{0}'", height));
+			propList.Add(string.Format("extraPlugins: 'justify,colorbutton,indentblock,textselection'"));
+			propList.Add("allowedContent: true");
+			if (isRu)
+				propList.Add("language: 'ru'");
+			propList.AddRange(editorProps);
 
-      return new HElementControl(
-        h.TextArea(
-          new HAttribute("id", dataName),
-          h.@class(dataName),
-          h.data("name", dataName),
-          h.Attribute("js-init", string.Format("CKEDITOR.replace(this, {{ {0} }})",
-            StringHlp.Join(", ", "{0}", propList)
-          )),
-          text
-        ), dataName
-      );
-    }
+			return new HElementControl(
+				h.TextArea(
+					new HAttribute("id", dataName),
+					h.@class(dataName),
+					h.data("name", dataName),
+					h.Attribute("js-init", string.Format("CKEDITOR.replace(this, {{ {0} }})",
+						StringHlp.Join(", ", "{0}", propList)
+					)),
+					text
+				), dataName
+			);
+		}
 
-    public static HElement CKEditorUpdateAll()
+		public static HElement CKEditorUpdateAll()
     {
       return h.Script(@"
                function CK_updateAll()

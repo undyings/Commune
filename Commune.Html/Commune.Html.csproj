@@ -68,6 +68,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\HInputLabel.cs" />
+    <Compile Include="Controls\HTextList.cs" />
     <Compile Include="Hlp\AuthHlp.cs" />
     <Compile Include="Controls\HAnchor.cs" />
     <Compile Include="Controls\HButton.cs" />

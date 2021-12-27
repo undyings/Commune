@@ -25,6 +25,7 @@ c:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Diag
 c:\Users\Сергей\Documents\Visual Studio 2015\Projects\Commune\Commune.Diagnostics\obj\Release\Commune.Diagnostics.pdb
 D:\Projects\Commune\Commune.Diagnostics\bin\Release\Commune.Diagnostics.dll
 D:\Projects\Commune\Commune.Diagnostics\bin\Release\Commune.Diagnostics.pdb
-D:\Projects\Commune\Commune.Diagnostics\obj\Release\Commune.Diagnostics.csprojResolveAssemblyReference.cache
 D:\Projects\Commune\Commune.Diagnostics\obj\Release\Commune.Diagnostics.dll
 D:\Projects\Commune\Commune.Diagnostics\obj\Release\Commune.Diagnostics.pdb
+D:\Projects\Commune\Commune.Diagnostics\obj\Release\Commune.Diagnostics.csprojAssemblyReference.cache
+D:\Projects\Commune\Commune.Diagnostics\obj\Release\Commune.Diagnostics.csproj.CoreCompileInputs.cache

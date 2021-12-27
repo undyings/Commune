@@ -15,8 +15,8 @@ namespace Commune.Html
     {
       return new HLink("#",
           new HImage(imageUrl)
-      ).ExtraClassNames("upbutton").Title("Наверх")
-        .BoxSizing().Size(46, 46).Align(null).PaddingTop(13)
+      ).ExtraClassNames("upbutton").Display("none").Title("Наверх")
+        .BoxSizing().Size(46, 46).Align(null).PaddingTop(13).FontSize(20)
         .Background("#fff").BorderRadius("50%")
         .BoxShadow("0 5px 10px rgba(0,0,0,.4), 0 -1px 1px rgba(0,0,0,.2)")
         .ZIndex(500).Bottom(10).Right(10)

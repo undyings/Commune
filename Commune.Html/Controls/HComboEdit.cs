@@ -47,7 +47,17 @@ namespace Commune.Html
 
       HtmlHlp.AddClassToCss(css, cssClassName, CssExtensions);
 
-      HElement[] options = ArrayHlp.Convert(comboItems, delegate (Tuple<T, string> item)
+			HtmlHlp.AddMediaToCss(css, cssClassName, MediaExtensions);
+
+			// hack чтобы в IE скрывалась оригинальная стрелочка
+			if (this.GetExtended("appearance") as string == "none")
+			{
+				HtmlHlp.AddClassToCss(css, ".{0}::-ms-expand", 
+					new CssExtensionAttribute[] { new CssExtensionAttribute("display", "none") }
+				);
+			}
+
+			HElement[] options = ArrayHlp.Convert(comboItems, delegate (Tuple<T, string> item)
       {
         object[] content = new object[] { h.value(item.Item1), item.Item2 };
         if (_.Equals(selected, item.Item1))

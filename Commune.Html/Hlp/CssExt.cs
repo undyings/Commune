@@ -269,8 +269,14 @@ namespace Commune.Html
 
     public static T BackgroundImage<T>(this T control, string imagePath) where T : IEditExtension
     {
-      return CssAttribute(control, "background-image", string.Format("url({0})", imagePath));
+			string value = imagePath != "none" ? string.Format("url({0})", imagePath) : "none";
+			return CssAttribute(control, "background-image", value);
     }
+
+		public static T BackgroundPosition<T>(this T control, string position) where T : IEditExtension
+		{
+			return CssAttribute(control, "background-position", position);
+		}
 
     public static T BackgroundSize<T>(this T control, string size) where T : IEditExtension
     {
@@ -325,6 +331,11 @@ namespace Commune.Html
       return Width(control, "100%");
     }
 
+		public static T WidthAuto<T>(this T control) where T : IEditExtension
+		{
+			return Width(control, "auto");
+		}
+
     public static T WidthLimit<T>(this T control, string minWidth, string maxWidth) where T : IEditExtension
     {
       if (!StringHlp.IsEmpty(minWidth))
@@ -359,7 +370,7 @@ namespace Commune.Html
     /// </summary>
     public static T RelativeWidth<T>(this T control, float widthInPercent) where T : IEditExtension
     {
-      return control.Width(string.Format("{0:F0}%", widthInPercent))
+      return control.Width(widthInPercent.ToString("F3", CultureInfo.InvariantCulture) + "%")
         .Display("inline-block").BoxSizing();
     }
 
@@ -488,6 +499,19 @@ namespace Commune.Html
       CssAttribute(control, "-ms-user-select", value);
       return CssAttribute(control, "user-select", value);
     }
+
+		public static T Outline<T>(this T control, string value) where T : IEditExtension
+		{
+			return CssAttribute(control, "outline", value);
+		}
+
+		public static T Appearance<T>(this T control, string value) where T : IEditExtension
+		{
+			CssAttribute(control, "-webkit-appearance", value);
+			CssAttribute(control, "-moz-appearance", value);
+			CssAttribute(control, "appearance", value);
+			return control;
+		}
 
     public static T BoxSizing<T>(this T control, string boxSizing) where T : IEditExtension
     {

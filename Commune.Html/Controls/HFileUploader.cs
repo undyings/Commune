@@ -12,6 +12,8 @@ namespace Commune.Html
     readonly string fileUploadJsPath;
     readonly string caption;
     readonly object objectId;
+		readonly int sizeLimit;
+		readonly string onComplete;
     readonly HAttribute[] attributes;
 
     /// <summary>
@@ -22,16 +24,26 @@ namespace Commune.Html
     /// </summary>
     /// <param name="fileUploadJsPath">Например, fileupload.js</param>
     /// <param name="objectId">Идентификатор объекта, к которому относятся загружаемые файлы</param>
-    public HFileUploader(string fileUploadJsPath, string caption, object objectId, params HAttribute[] attributes) :
+    public HFileUploader(string fileUploadJsPath, string caption, object objectId,
+			int sizeLimit, string onComplete, params HAttribute[] attributes) :
       base("HFileUploader", "")
     {
       this.fileUploadJsPath = fileUploadJsPath;
       this.caption = caption;
       this.objectId = objectId;
+			this.sizeLimit = sizeLimit;
+			this.onComplete = onComplete;
       this.attributes = attributes;
     }
 
-    static readonly HBuilder h = null;
+		public HFileUploader(string fileUploadJsPath, string caption, object objectId, 
+			params HAttribute[] attributes) :
+			this(fileUploadJsPath, caption, objectId, 0, null, attributes)
+		{
+		}
+
+
+		static readonly HBuilder h = null;
 
     public HElement ToHtml(string cssClassName, StringBuilder css)
     {
@@ -42,7 +54,15 @@ namespace Commune.Html
         builder.AppendFormat(", action: '{0}'", fileUploadJsPath);
         builder.Append(", encoding: 'multipart'");
         builder.AppendFormat(", uploadButtonText: '{0}'", caption);
-        builder.Append(", params: {");
+				if (sizeLimit != 0)
+				{
+					builder.AppendFormat(", sizeLimit: {0}", sizeLimit);
+				}
+				if (!StringHlp.IsEmpty(onComplete))
+				{
+					builder.AppendFormat(", onComplete: function (data) {{ {0} }}", onComplete);
+				}
+				builder.Append(", params: {");
         builder.AppendFormat("objectId: '{0}'", objectId);
         foreach (HAttribute attr in attributes)
         {

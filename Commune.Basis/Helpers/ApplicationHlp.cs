@@ -33,8 +33,12 @@ namespace Commune.Basis
     public static string CheckAndCreateFolderPath(string root, params string[] folders)
     {
       string path = root;
+
       foreach (string folder in folders)
       {
+				if (StringHlp.IsEmpty(folder))
+					continue;
+
         path = Path.Combine(path, folder);
         if (!Directory.Exists(path))
           Directory.CreateDirectory(path);

@@ -172,7 +172,8 @@ namespace Commune.Data
         dbConnection = MySqlHlp.OpenConnection(connectionStringWithoutDatabase);
         Logger.AddMessage("Создано подключение к базе данных: {0}, {1}", dataBase, dbConnection.ConnectionTimeout);
       }
-      dbConnection.ChangeDatabase(dataBase);
+			if (!StringHlp.IsEmpty(dataBase))
+				dbConnection.ChangeDatabase(dataBase);
     }
 
     void CloseConnection()

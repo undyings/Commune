@@ -20,12 +20,16 @@ namespace Commune.Basis
     /// <param name="fileName"></param>
     public static void Save(object obj, string fileName)
     {
-      using (MemoryStream ms = new MemoryStream())
-      {
-        Save(obj, ms);
-        using (FileStream fs = new FileStream(fileName, FileMode.Create, FileAccess.Write))
-          ms.WriteTo(fs);
-      }
+			FileStreamInfo stream = FileStreamInfo.WithFilename(fileName);
+			stream.WithFormating();
+			Save(obj, stream);
+
+			//using (MemoryStream ms = new MemoryStream())
+   //   {
+   //     Save(obj, ms);
+   //     using (FileStream fs = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+   //       ms.WriteTo(fs);
+   //   }
     }
 
     public static void QuickSave(object obj, string fileName)
@@ -159,9 +163,26 @@ namespace Commune.Basis
       return ns;
     }
 
-    #endregion
+		#endregion
 
-    #region Loading
+		#region Loading
+
+		public static T SafeLoad<T>(string filename) where T : new()
+		{
+			if (!File.Exists(filename))
+				return new T();
+
+			try
+			{
+				return Load<T>(filename);
+			}
+			catch (Exception ex)
+			{
+				Logger.WriteException(ex);
+
+				return new T();
+			}
+		}
 
     public static T Load<T>(string filename)
     {

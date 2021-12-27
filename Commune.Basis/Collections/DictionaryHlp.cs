@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Commune.Basis
 {
-  public class DictionaryHlp
+  public static class DictionaryHlp
   {
     public static TValue GetValueOrDefault<TKey, TValue>(IDictionary<TKey, TValue> dict, TKey key)
     {
@@ -22,12 +22,23 @@ namespace Commune.Basis
       return defValue;
     }
 
-    public static void AddToGroupedDict<TKey, TValue>(IDictionary<TKey, List<TValue>> dict, TKey index, TValue value)
-    {
-      if (!dict.ContainsKey(index))
-        dict[index] = new List<TValue>();
-      dict[index].Add(value);
-    }
+		public static void AddValue<TKey, TValue>(this IDictionary<TKey, List<TValue>> index, TKey key, TValue value)
+		{
+			List<TValue> values;
+			if (!index.TryGetValue(key, out values))
+			{
+				values = new List<TValue>();
+				index[key] = values;
+			}
+			values.Add(value);
+		}
+
+    //public static void AddToGroupedDict<TKey, TValue>(IDictionary<TKey, List<TValue>> dict, TKey index, TValue value)
+    //{
+    //  if (!dict.ContainsKey(index))
+    //    dict[index] = new List<TValue>();
+    //  dict[index].Add(value);
+    //}
 
     /// <summary>
     /// Если в словаре нет такого ключа, то размещает под указанным ключом указанное значение

@@ -401,15 +401,15 @@ namespace Commune.Basis
     /// Отображение extractor должно быть инъективно, т. е. ключи должны быть уникальны.
     /// Если нет, то останется только последнее вхождение для каждого ключа.
     /// </summary>
-    public static Dictionary<TKey, TItem> MakeIndex<TKey, TItem>(ICollection<TItem> col, Getter<TKey, TItem> extractor)
-    {
-      Dictionary<TKey, TItem> index = new Dictionary<TKey, TItem>(col.Count);
-      foreach (TItem item in col)
-      {
-        index[extractor(item)] = item;
-      }
-      return index;
-    }
+    //public static Dictionary<TKey, TItem> MakeIndex<TKey, TItem>(ICollection<TItem> col, Getter<TKey, TItem> extractor)
+    //{
+    //  Dictionary<TKey, TItem> index = new Dictionary<TKey, TItem>(col.Count);
+    //  foreach (TItem item in col)
+    //  {
+    //    index[extractor(item)] = item;
+    //  }
+    //  return index;
+    //}
     /// <summary>
     /// Значение при размножение не копируется (не клонируется)
     /// </summary>

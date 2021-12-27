@@ -35,6 +35,7 @@ namespace Commune.Html
       elements.Add(h.type("checkbox"));
       elements.Add(h.data("name", Name));
       elements.Add(h.data("id", Name));
+			elements.Add(new HAttribute("id", Name));
       if (isChecked)
         elements.Add(h.@checked());
 

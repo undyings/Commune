@@ -10,14 +10,16 @@ namespace Commune.Html
   public class HTextEdit : ExtensionContainer, IHtmlControl
   {
     readonly string value;
-    public HTextEdit(string dataName, string value) :
+		readonly HStyle[] pseudoClasses;
+		public HTextEdit(string dataName, string value, params HStyle[] pseudoClasses) :
       base("HTextEdit", dataName)
     {
       this.value = value;
+			this.pseudoClasses = pseudoClasses;
     }
 
-    public HTextEdit(string dataName) :
-      this(dataName, "")
+    public HTextEdit(string dataName, params HStyle[] pseudoClasses) :
+      this(dataName, "", pseudoClasses)
     {
     }
 
@@ -27,7 +29,10 @@ namespace Commune.Html
     {
       HtmlHlp.AddClassToCss(css, cssClassName, CssExtensions);
 
-      HtmlHlp.AddMediaToCss(css, cssClassName, MediaExtensions);
+			foreach (HStyle pseudo in pseudoClasses)
+				HtmlHlp.AddStyleToCss(css, cssClassName, pseudo);
+
+			HtmlHlp.AddMediaToCss(css, cssClassName, MediaExtensions);
 
       return h.Input(HtmlHlp.ContentForHElement(this, cssClassName,
         h.type("text"), h.data("name", Name), h.value(value), h.data("id", Name))

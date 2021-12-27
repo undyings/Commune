@@ -15,6 +15,14 @@ namespace Commune.Html
       return control;
     }
 
+		public static T Disabled<T>(this T control, bool disabled) where T : IEditExtension
+		{
+			if (!disabled)
+				return control;
+
+			return TagAttribute(control, "disabled", "disabled");
+		}
+
     public static T Title<T>(this T control, string toolTip) where T : IEditExtension
     {
       return TagAttribute(control, "title", toolTip);

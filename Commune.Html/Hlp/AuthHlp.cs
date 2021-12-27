@@ -102,7 +102,7 @@ namespace Commune.Html
     }
 
     public static void SendMail(SmtpClient client, string from, string mailto,
-      string caption, string messageAsHtml, Attachment attach = null)
+      string caption, string messageAsHtml, params Attachment[] attachments)
     {
       using (MailMessage mail = new MailMessage())
       {
@@ -112,8 +112,8 @@ namespace Commune.Html
         mail.BodyEncoding = System.Text.Encoding.UTF8;
         mail.Body = messageAsHtml;
         mail.IsBodyHtml = true;
-        if (attach != null)
-          mail.Attachments.Add(attach);
+        foreach (Attachment attachment in attachments)
+          mail.Attachments.Add(attachment);
 
         client.Send(mail);
       }

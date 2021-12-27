@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Commune.Basis;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -44,4 +45,37 @@ namespace Commune.Html
     {
     }
   }
+
+	public class HPlaceholder
+	{
+		readonly HTone style;
+		public HPlaceholder(HTone style)
+		{
+			this.style = style;
+		}
+
+		public HStyle[] ToStyles()
+		{
+			string[] names = new string[] {
+				"::placeholder",
+				"::-ms-input-placeholder",
+				":-ms-input-placeholder",
+				"::-webkit-input-placeholder",
+				"::-moz-placeholder"
+			};
+
+			return ArrayHlp.Convert(names, delegate (string name)
+			{
+				HStyle pseudo = new HStyle(".{0}" + name);
+				foreach (CssExtensionAttribute ext in style.CssExtensions)
+				{
+					pseudo.WithExtension(ext);
+				}
+				return pseudo;
+			}
+			);
+
+		}
+	}
+
 }

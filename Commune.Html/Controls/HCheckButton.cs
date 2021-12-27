@@ -12,15 +12,17 @@ namespace Commune.Html
     readonly string dataName;
     readonly IHtmlControl vacant;
     readonly IHtmlControl selected;
-    readonly string onClick;
+		readonly bool isChecked;
+		readonly string onClick;
     readonly HStyle[] pseudoClasses;
-    public HCheckButton(string dataName, IHtmlControl vacant, IHtmlControl selected, string onClick,
-      params HStyle[] pseudoClasses) :
+    public HCheckButton(string dataName, IHtmlControl vacant, IHtmlControl selected, 
+			bool isChecked, string onClick, params HStyle[] pseudoClasses) :
       base("HCheckButton", dataName)
     {
       this.dataName = dataName;
       this.vacant = vacant;
       this.selected = selected;
+			this.isChecked = isChecked;
       this.onClick = onClick;
       this.pseudoClasses = pseudoClasses;
     }
@@ -79,8 +81,10 @@ namespace Commune.Html
       checkElements.Add(h.type("checkbox"));
       checkElements.Add(h.data("name", Name));
       checkElements.Add(h.data("id", checkClassName));
-      
-      return h.Div(HtmlHlp.ContentForHElement(this, cssClassName,
+			if (isChecked)
+				checkElements.Add(h.@checked());
+
+			return h.Div(HtmlHlp.ContentForHElement(this, cssClassName,
         h.Input(checkElements.ToArray()),
         vacantElement,
         selectedElement

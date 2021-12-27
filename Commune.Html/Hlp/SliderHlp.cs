@@ -39,17 +39,28 @@ namespace Commune.Html
           );
         }
 
-        slideControls.Add(
-          slideGetter(unit).PositionAbsolute().Left(0).Right(0).Top(0).Bottom(0)
-            .ZIndex(index == 0 ? 1 : -1).ExtraClassNames(sliderName)
-        );
+        IHtmlControl slide = slideGetter(unit).PositionAbsolute().Left(0).Right(0).Top(0).Bottom(0)
+            .ZIndex(index == 0 ? 1 : -1).ExtraClassNames(sliderName);
+
+        if (index > 0)
+          slide.Display("none");
+
+        slideControls.Add(slide);
       }
 
-      return slideControls.ToArray();
+			slideControls.Add(new HButton(string.Format("{0}_prev", sliderName), "")
+				.Display("none").OnClick(string.Format("{0}_prev();", sliderName))
+			);
+			slideControls.Add(new HButton(string.Format("{0}_next", sliderName), "")
+				.Display("none").OnClick(string.Format("{0}_next();", sliderName))
+			);
+
+			return slideControls.ToArray();
     }
 
     public static IHtmlControl GetSliderToggle(string sliderName, int slideCount,
-      int size, int hMargin, string background, string selectedBackground)
+      int size, int hMargin, string background, string selectedBackground,
+			int mediaMaxWidth, int mediaSize, int mediaHMargin)
     {
       IHtmlControl[] buttons = new IHtmlControl[slideCount];
       for (int i = 0; i < buttons.Length; ++i)
@@ -58,9 +69,10 @@ namespace Commune.Html
           new HPanel().Height("100%").BorderRadius("50%").Background(selectedBackground)
             .Display(i == 0 ? "block" : "none")
             .ExtraClassNames(string.Format("{0}Toggle", sliderName))
-        ).InlineBlock().Size(size, size).MarginLeft(hMargin).MarginRight(hMargin).CursorPointer()
+        ).InlineBlock().Size(size, size).MarginRight(hMargin).CursorPointer()
           .BorderRadius("50%").Background(background)
-          .OnClick(string.Format("{0}_set({1});", sliderName, i));
+          .OnClick(string.Format("{0}_set({1});", sliderName, i))
+					.Media(mediaMaxWidth, new HStyle().Size(mediaSize, mediaSize).MarginRight(mediaHMargin));
       }
 
       return new HPanel(
@@ -106,7 +118,7 @@ function <<slider>>_set(newIndex)
     if (i == sliderIndex)
     {
       slider.style.animationName = 'none';
-      slider.style.display = 'block';
+      slider.style.display = 'none';
       slider.style.zIndex = 0;
     }
     else if (i == newIndex)

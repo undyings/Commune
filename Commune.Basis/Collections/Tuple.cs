@@ -16,6 +16,14 @@ namespace Commune.Basis
     }
   }
 
+	public class Option : Tuple<string, string>
+	{
+		public Option(string item1, string item2) :
+			base(item1, item2)
+		{
+		}
+	}
+
   //public class Tuple<T1, T2>
   //{
   //  public Tuple(T1 first, T2 second)

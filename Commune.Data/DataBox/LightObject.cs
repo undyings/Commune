@@ -119,7 +119,7 @@ namespace Commune.Data
       Set(property, 0, propertyValue);
     }
 
-    public void Create<TField>(IPropertyBlank<int, TField> property)
+		public void Create<TField>(IPropertyBlank<int, TField> property)
     {
       FindOrCreateRow(property, 0);
     }

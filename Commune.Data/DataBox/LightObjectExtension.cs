@@ -42,5 +42,5 @@ namespace Commune.Data
 
       return Get(obj, property, 0);
     }
-  }
+	}
 }

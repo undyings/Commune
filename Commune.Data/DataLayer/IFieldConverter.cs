@@ -266,6 +266,21 @@ namespace Commune.Data
     }
   }
 
+	public class IntUintConverter : IFieldConverter
+	{
+		public readonly static IntUintConverter Default = new IntUintConverter();
+
+		public object ToGridValue(object databaseValue)
+		{
+			return (int)(uint)databaseValue;
+		}
+
+		public object ToDatabaseValue(object gridValue)
+		{
+			return (uint)(int)gridValue;
+		}
+	}
+
   public class IntLongConverter : IFieldConverter
   {
     public readonly static IntLongConverter Default = new IntLongConverter();
